@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wareflow_mobile/modules/auth/views/screen_login.dart';
 import 'package:wareflow_mobile/modules/home/views/screen_home.dart';
 import 'package:wareflow_mobile/utils/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
         useMaterial3: true,
-        textTheme: GoogleFonts.montserratTextTheme().copyWith(),
+        // textTheme: GoogleFonts.montserratTextTheme().copyWith(),
       ),
       home: ScreenHome(),
     );
