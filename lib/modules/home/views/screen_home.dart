@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:wareflow_mobile/modules/customers/views/screen_customer_listing.dart';
+import 'package:wareflow_mobile/modules/dashboard/screen_inventory.dart';
 import 'package:wareflow_mobile/modules/dashboard/views/screen_dashboard.dart';
+import 'package:wareflow_mobile/modules/dashboard/views/widgets/user_profile.dart';
 import 'package:wareflow_mobile/modules/orders/views/screen_orders.dart';
 
 class ScreenHome extends StatefulWidget {
@@ -32,10 +34,10 @@ class _ScreenHomeState extends State<ScreenHome>
             Expanded(
                 child: TabBarView(controller: tabController, children: const [
               ScreenDashboard(),
-              Placeholder(),
+              ScreenInventory(),
               ScreenCustomerListing(),
               ScreenOrderListing(),
-              Placeholder()
+              UserProfile()
             ]))
           ],
         ),
