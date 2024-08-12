@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wareflow_mobile/modules/auth/views/screen_login.dart';
 import 'package:wareflow_mobile/modules/home/views/screen_home.dart';
 import 'package:wareflow_mobile/utils/colors.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());

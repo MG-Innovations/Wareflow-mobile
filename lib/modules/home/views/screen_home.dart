@@ -6,6 +6,7 @@ import 'package:wareflow_mobile/modules/dashboard/screen_inventory.dart';
 import 'package:wareflow_mobile/modules/dashboard/views/screen_dashboard.dart';
 import 'package:wareflow_mobile/modules/dashboard/views/widgets/user_profile.dart';
 import 'package:wareflow_mobile/modules/orders/views/screen_orders.dart';
+import 'package:wareflow_mobile/modules/products/screens/screen_product.dart';
 
 class ScreenHome extends StatefulWidget {
   ScreenHome({super.key});
