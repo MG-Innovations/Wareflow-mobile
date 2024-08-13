@@ -3,6 +3,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:wareflow_mobile/modules/dashboard/views/widgets/widget_analytic.dart';
 import 'package:wareflow_mobile/modules/orders/views/widgets/widget_order_card.dart';
 import 'package:wareflow_mobile/utils/colors.dart';
+import 'package:wareflow_mobile/widgets/common_app_bar.dart';
 
 class ScreenDashboard extends StatelessWidget {
   const ScreenDashboard({super.key});
@@ -10,11 +11,9 @@ class ScreenDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Dashboard',
-          style: TextStyle(fontWeight: FontWeight.w500),
-        ),
+      backgroundColor: Colors.white,
+      appBar: const WidgetCommonAppbar(
+        title: "Dashboard",
       ),
       body: SingleChildScrollView(
         child: Column(

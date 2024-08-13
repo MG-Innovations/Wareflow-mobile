@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:wareflow_mobile/utils/enums.dart';
 
 class HFunctions {
@@ -14,5 +16,17 @@ class HFunctions {
       case EnumChipType.productLowStock:
         return "Low Stock";
     }
+  }
+
+  static void showSnackbar(
+      {required BuildContext context,
+      required String content,
+      bool success = false}) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(content),
+        duration: const Duration(seconds: 1),
+      ),
+    );
   }
 }
