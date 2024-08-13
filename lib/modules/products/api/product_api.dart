@@ -1,6 +1,5 @@
-import 'dart:convert';
 import 'dart:developer';
-import 'package:wareflow_mobile/modules/products/model.dart';
+import 'package:wareflow_mobile/modules/products/models/model_product.dart';
 import 'package:wareflow_mobile/utils/dio.dart';
 import 'package:wareflow_mobile/widgets/common_textfield.dart';
 

@@ -26,7 +26,7 @@ class CommonTextfield extends StatefulWidget {
   final TextInputType keyboardType;
   final Function(ModelDropdown item)? onSelectDropdown;
   final List<ModelDropdown> dropdownList;
-
+  final String? regex;
   const CommonTextfield({
     super.key,
     required this.controller,
@@ -36,6 +36,7 @@ class CommonTextfield extends StatefulWidget {
     this.type = FieldType.text,
     this.keyboardType = TextInputType.text,
     this.hintText = "Enter text",
+    this.regex,
     this.onSelectDropdown,
   });
 
@@ -179,7 +180,10 @@ class _CommonTextfieldState extends State<CommonTextfield> {
               keyboardType: widget.keyboardType,
               readOnly: widget.type == FieldType.dropdown,
               validator: (value) {
-                if (widget.compulsory && value!.isEmpty) {
+                if (widget.regex != null &&
+                    !RegExp(widget.regex!).hasMatch(value!)) {
+                  return 'Invalid format';
+                } else if (widget.compulsory && value!.isEmpty) {
                   return 'This field is required';
                 }
                 return null;

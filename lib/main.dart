@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:wareflow_mobile/modules/home/views/screen_home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wareflow_mobile/modules/auth/views/screen_login.dart';
 import 'package:wareflow_mobile/utils/colors.dart';
 
-void main() {
+SharedPreferences? pref;
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  pref = await SharedPreferences.getInstance();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,7 +22,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         // textTheme: GoogleFonts.montserratTextTheme().copyWith(),
       ),
-      home: ScreenLogin(),
+      home: const ScreenLogin(),
     );
   }
 }
