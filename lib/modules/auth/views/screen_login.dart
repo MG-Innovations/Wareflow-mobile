@@ -102,12 +102,12 @@ class _ScreenLoginState extends State<ScreenLogin> {
             isLoading = false;
           });
         } else {
+          setState(() {
+            isLoading = false;
+          });
           HFunctions.showSnackbar(
               context: context, content: "Error logging in");
         }
-        setState(() {
-          isLoading = false;
-        });
       });
     }
   }
