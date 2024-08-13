@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wareflow_mobile/modules/home/views/screen_home.dart';
 import 'package:wareflow_mobile/utils/colors.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,9 +18,34 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
         useMaterial3: true,
-        textTheme: GoogleFonts.montserratTextTheme().copyWith(),
+        // textTheme: GoogleFonts.montserratTextTheme().copyWith(),
       ),
-      home: ScreenHome(),
+      home: ScreenLogin(),
     );
   }
 }
+
+
+// body: Padding(
+      //   padding: const EdgeInsets.all(16.0),
+      //   child: Column(
+      //     mainAxisAlignment: MainAxisAlignment.center,
+      //     children: [
+      //       const Text('Login'),
+      //       const TextField(
+      //         decoration: InputDecoration(
+      //           hintText: 'Username',
+      //         ),
+      //       ),
+      //       const TextField(
+      //         decoration: InputDecoration(
+      //           hintText: 'Password',
+      //         ),
+      //       ),
+      //       ElevatedButton(
+      //         onPressed: () {},
+      //         child: const Text('Login'),
+      //       ),
+      //     ],
+      //   ),
+      // ),

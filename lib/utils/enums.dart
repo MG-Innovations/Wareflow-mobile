@@ -8,3 +8,5 @@ enum EnumChipType {
   productOutOfStock,
   productLowStock,
 }
+
+enum TextInputType { text, number, email, phone, password, multiline, datetime }

@@ -70,12 +70,6 @@ class WidgetAnalytics extends StatelessWidget {
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            decoration: BoxDecoration(
-              color: secondaryColor,
-              borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(10),
-                  bottomRight: Radius.circular(10)),
-            ),
             child: Text(
               subTitle,
               style: const TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
