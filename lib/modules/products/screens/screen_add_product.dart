@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:wareflow_mobile/modules/products/api/product_api.dart';
 import 'package:wareflow_mobile/utils/helper_functions.dart';
@@ -28,8 +26,6 @@ class _ScreenAddProductState extends State<ScreenAddProduct> {
   final formKey = GlobalKey<FormState>();
 
   ModelDropdown? productType, company;
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +141,7 @@ class _ScreenAddProductState extends State<ScreenAddProduct> {
                       });
                     }
                   },
-                  child: const Text("+ Add Product"),
+                  child: const Text("Add Product"),
                 )
               ],
             ),
