@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
@@ -24,19 +25,30 @@ class CommonTextfield extends StatefulWidget {
   final bool compulsory;
   final FieldType type;
   final TextInputType keyboardType;
+  final Function? onSuffixIconPressed;
+  final IconData? suffixIcon;
+  final IconData? prefixIcon;
   final Function(ModelDropdown item)? onSelectDropdown;
-  final List<ModelDropdown> dropdownList;
+  final Function(String value)? onChangeValue;
+  final List<ModelDropdown>? dropdownList;
+  final Future<List<ModelDropdown>>? fetchDropdown;
   final String? regex;
+
   const CommonTextfield({
     super.key,
     required this.controller,
-    required this.label,
-    this.dropdownList = const [],
+    this.label,
+    this.prefixIcon,
+    this.onChangeValue,
+    this.dropdownList,
+    this.fetchDropdown,
     this.compulsory = false,
     this.type = FieldType.text,
     this.keyboardType = TextInputType.text,
     this.hintText = "Enter text",
     this.regex,
+    this.onSuffixIconPressed,
+    this.suffixIcon,
     this.onSelectDropdown,
   });
 
@@ -45,99 +57,132 @@ class CommonTextfield extends StatefulWidget {
 }
 
 class _CommonTextfieldState extends State<CommonTextfield> {
+  List<ModelDropdown> dropdownList = [];
+  bool isLoadingDropdown = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadDropdownData();
+  }
+
+  Future<void> _loadDropdownData() async {
+    if (widget.fetchDropdown != null) {
+      try {
+        dropdownList = await widget.fetchDropdown!;
+      } catch (e) {
+        log("Error fetching dropdown data: $e");
+      }
+    } else if (widget.dropdownList != null) {
+      dropdownList = widget.dropdownList!;
+    }
+
+    setState(() {
+      isLoadingDropdown = false; // Dropdown data has been loaded
+    });
+  }
+
   void _showDropdownDialog() async {
+    if (dropdownList.isEmpty) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("No items found")));
+      return;
+    }
+
     TextEditingController searchController = TextEditingController();
-    List<ModelDropdown> filteredList = widget.dropdownList;
+    List<ModelDropdown> filteredList = dropdownList;
 
     final selectedValue = await showDialog<ModelDropdown>(
-        context: context,
-        builder: (context) {
-          return StatefulBuilder(
-            builder: (context, setState) {
-              return Dialog(
-                shape: RoundedRectangleBorder(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return Dialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5),
+              ),
+              elevation: 0,
+              backgroundColor: Colors.white,
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
+                  border: Border.all(color: Colors.grey.shade300, width: 1),
                 ),
-                elevation: 0,
-                backgroundColor: Colors.white,
-                child: Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    border: Border.all(color: Colors.grey.shade300, width: 1),
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.label ?? 'Select an option',
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black,
-                        ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.label ?? 'Select an option',
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
                       ),
-                      const SizedBox(height: 16),
-                      TextField(
-                        controller: searchController,
-                        onChanged: (value) {
-                          setState(() {
-                            filteredList = widget.dropdownList
-                                .where((item) => item.name
-                                    .toLowerCase()
-                                    .contains(value.toLowerCase()))
-                                .toList();
-                          });
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Search...',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          prefixIcon: const Icon(Icons.search),
+                    ),
+                    const SizedBox(height: 16),
+                    TextField(
+                      controller: searchController,
+                      onChanged: (value) {
+                        setState(() {
+                          filteredList = dropdownList
+                              .where((item) => item.name
+                                  .toLowerCase()
+                                  .contains(value.toLowerCase()))
+                              .toList();
+                        });
+                      },
+                      decoration: InputDecoration(
+                        hintText: 'Search...',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
                         ),
+                        prefixIcon: const Icon(Icons.search),
                       ),
-                      const SizedBox(height: 5),
-                      SizedBox(
-                        width: double.maxFinite,
-                        child: filteredList.isNotEmpty
-                            ? ListView.separated(
-                                shrinkWrap: true,
-                                itemCount: filteredList.length,
-                                itemBuilder: (context, index) {
-                                  final item = filteredList[index];
-                                  return ListTile(
-                                    title: Text(
-                                      item.name,
-                                      style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.black,
-                                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    SizedBox(
+                      width: double.maxFinite,
+                      child: filteredList.isNotEmpty
+                          ? ListView.separated(
+                              shrinkWrap: true,
+                              itemCount: filteredList.length,
+                              itemBuilder: (context, index) {
+                                final item = filteredList[index];
+                                return ListTile(
+                                  title: Text(
+                                    item.name,
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.black,
                                     ),
-                                    onTap: () {
-                                      Navigator.of(context).pop(item);
-                                    },
-                                  );
-                                },
-                                separatorBuilder: (context, index) => Divider(
-                                  color: Colors.grey.shade300,
-                                  thickness: 1,
-                                  height: 1, // Reduces the space between items
-                                ),
-                              )
-                            : const Center(
-                                child: Text('No results found'),
+                                  ),
+                                  onTap: () {
+                                    Navigator.of(context).pop(item);
+                                  },
+                                );
+                              },
+                              separatorBuilder: (context, index) => Divider(
+                                color: Colors.grey.shade300,
+                                thickness: 1,
+                                height: 1,
                               ),
-                      ),
-                    ],
-                  ),
+                            )
+                          : const Center(
+                              child: Text('No results found'),
+                            ),
+                    ),
+                  ],
                 ),
-              );
-            },
-          );
-        });
+              ),
+            );
+          },
+        );
+      },
+    );
+
     if (selectedValue != null && widget.onSelectDropdown != null) {
       widget.onSelectDropdown!(selectedValue);
     }
@@ -169,7 +214,7 @@ class _CommonTextfieldState extends State<CommonTextfield> {
         if (widget.label != null) const SizedBox(height: 5),
         GestureDetector(
           onTap: () {
-            if (widget.type == FieldType.dropdown) {
+            if (widget.type == FieldType.dropdown && !isLoadingDropdown) {
               _showDropdownDialog();
             }
           },
@@ -188,18 +233,41 @@ class _CommonTextfieldState extends State<CommonTextfield> {
                 }
                 return null;
               },
+              onChanged: (value){
+                if(widget.onChangeValue != null){
+                  widget.onChangeValue!(value);
+                }
+              },
               decoration: InputDecoration(
-                hintText: widget.hintText,
+                hintText: isLoadingDropdown && widget.type == FieldType.dropdown
+                    ? 'Loading...'
+                    : widget.hintText,
+                prefixIcon: widget.prefixIcon != null ? Icon(widget.prefixIcon):null,
                 hintStyle: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                 ),
                 suffixIcon: widget.type == FieldType.dropdown
-                    ? PhosphorIcon(
-                        PhosphorIcons.caretDown(),
-                        size: 20,
-                      )
-                    : null,
+                    ? isLoadingDropdown
+                        ? const SizedBox(
+                            width: 10,
+                            height: 10,
+                            child: CircularProgressIndicator(strokeWidth: 1),
+                          )
+                        : PhosphorIcon(
+                            PhosphorIcons.caretDown(),
+                            size: 20,
+                          )
+                    : (widget.suffixIcon != null)
+                        ? IconButton(
+                            icon: Icon(widget.suffixIcon),
+                            onPressed: () {
+                              if (widget.onSuffixIconPressed != null) {
+                                widget.onSuffixIconPressed!();
+                              }
+                            },
+                          )
+                        : null,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5),
                 ),

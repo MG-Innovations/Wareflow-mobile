@@ -4,10 +4,12 @@ import 'package:wareflow_mobile/utils/dio.dart';
 import 'package:wareflow_mobile/widgets/common_textfield.dart';
 
 class InventoryAPI {
-  static Future<List<ModelProduct>> getProducts() async {
+  static Future<List<ModelProduct>> getProducts({
+    required String query,
+}) async {
     List<ModelProduct> products = [];
     try {
-      final response = await dioClient.get('/product/product');
+      final response = await dioClient.get('/product/product?search=$query');
       if (response.statusCode == 200) {
         for (var item in response.data["data"]) {
           products.add(ModelProduct.fromJson(item));

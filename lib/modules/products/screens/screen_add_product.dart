@@ -29,27 +29,7 @@ class _ScreenAddProductState extends State<ScreenAddProduct> {
 
   ModelDropdown? productType, company;
 
-  List<ModelDropdown> productTypes = [], companyList = [];
 
-  @override
-  void initState() {
-    super.initState();
-    getLists();
-  }
-
-  getLists() {
-    InventoryAPI.getAllCompany().then((value) {
-      log(value.toString());
-      companyList = value;
-    });
-
-    InventoryAPI.getAllProductType().then((value) {
-      log(value.toString());
-      productTypes = value;
-    });
-
-    setState(() {});
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +66,7 @@ class _ScreenAddProductState extends State<ScreenAddProduct> {
                         label: 'Product Type',
                         hintText: "Select product type",
                         type: FieldType.dropdown,
-                        dropdownList: [...productTypes],
+                        fetchDropdown: InventoryAPI.getAllProductType(),
                         compulsory: true,
                         onSelectDropdown: (item) {
                           productTypeController.text = item.name;
@@ -99,7 +79,7 @@ class _ScreenAddProductState extends State<ScreenAddProduct> {
                         label: 'Product Company',
                         hintText: "Select product company",
                         type: FieldType.dropdown,
-                        dropdownList: [...companyList],
+                        fetchDropdown: InventoryAPI.getAllCompany(),
                         compulsory: true,
                         onSelectDropdown: (item) {
                           productCompanyController.text = item.name;
