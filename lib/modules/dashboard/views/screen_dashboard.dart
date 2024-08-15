@@ -59,11 +59,11 @@ class ScreenDashboard extends StatelessWidget {
                     fontWeight: FontWeight.w900,
                     color: AppColors.primary)),
             const SizedBox(height: 5),
-            const WidgetOrderCard(),
-            const SizedBox(height: 15),
-            const WidgetOrderCard(),
-            const SizedBox(height: 15),
-            const WidgetOrderCard()
+            // const WidgetOrderCard(),
+            // const SizedBox(height: 15),
+            // const WidgetOrderCard(),
+            // const SizedBox(height: 15),
+            // const WidgetOrderCard()
           ],
         ),
       ),

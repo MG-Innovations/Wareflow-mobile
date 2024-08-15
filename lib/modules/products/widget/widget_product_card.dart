@@ -3,13 +3,18 @@ import 'package:wareflow_mobile/modules/products/models/model_product.dart';
 
 class WidgetProductCard extends StatelessWidget {
   final ModelProduct product;
-  const WidgetProductCard({super.key, required this.product});
+  final bool selected;
+  const WidgetProductCard({
+    super.key,
+    required this.product,
+    this.selected = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: selected ? Colors.grey[200] : Colors.white,
         border: Border.all(color: Colors.black),
         borderRadius: BorderRadius.circular(8),
       ),
@@ -20,7 +25,7 @@ class WidgetProductCard extends StatelessWidget {
           children: [
             Text(
               product.name ?? "NA",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: 8),
             Row(
