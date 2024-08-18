@@ -8,7 +8,7 @@ import 'package:wareflow_mobile/modules/orders/views/screen_orders.dart';
 import 'package:wareflow_mobile/modules/products/screens/screen_product.dart';
 
 class ScreenHome extends StatefulWidget {
-  ScreenHome({super.key});
+  const ScreenHome({super.key});
 
   @override
   State<ScreenHome> createState() => _ScreenHomeState();

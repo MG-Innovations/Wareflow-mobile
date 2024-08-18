@@ -20,7 +20,7 @@ class WidgetProductCard extends StatelessWidget {
           children: [
             Text(
               product.name ?? "NA",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: 8),
             Row(

@@ -3,7 +3,6 @@ import 'package:wareflow_mobile/modules/customers/api/customer_api.dart';
 import 'package:wareflow_mobile/modules/customers/models/model_customer.dart';
 import 'package:wareflow_mobile/modules/customers/screens/screen_add_customer.dart';
 import 'package:wareflow_mobile/modules/customers/views/widgets/widget_customer_card.dart';
-import 'package:wareflow_mobile/modules/products/screens/screen_add_product.dart';
 import 'package:wareflow_mobile/widgets/common_app_bar.dart';
 
 class ScreenCustomers extends StatefulWidget {
