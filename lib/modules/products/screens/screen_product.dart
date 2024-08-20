@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:wareflow_mobile/modules/products/api/product_api.dart';
 import 'package:wareflow_mobile/modules/products/models/model_product.dart';
+import 'package:wareflow_mobile/modules/products/screens/product_type_form_screen.dart';
+import 'package:wareflow_mobile/modules/products/screens/product_type_listing.dart';
 import 'package:wareflow_mobile/modules/products/screens/screen_add_product.dart';
 import 'package:wareflow_mobile/modules/products/screens/screen_form.dart';
 import 'package:wareflow_mobile/modules/products/widget/widget_product_card.dart';
@@ -34,8 +36,7 @@ class _ScreenProductsState extends State<ScreenProducts> {
   }
 
   Future<Map<String, dynamic>> fetchData() async {
-    final response = await http
-        .get(Uri.parse('http://13.233.100.211:8000/api/v1/product_type/'));
+    final response = await http.get(Uri.parse('product_type/'));
 
     if (response.statusCode == 200) {
       return json.decode(response.body)['data'];
@@ -63,15 +64,30 @@ class _ScreenProductsState extends State<ScreenProducts> {
           IconButton(
             icon: const Icon(Icons.data_object),
             onPressed: () async {
-              final data = await fetchData();
-              _showForm(context, data['name'], data['description']);
+              Navigator.of(context)
+                  .push(
+                MaterialPageRoute(
+                    builder: (context) => const ProductTypeListing()),
+              )
+                  .then((value) {
+                setState(() {});
+              });
             },
           ),
           IconButton(
             icon: const Icon(Icons.inventory),
             onPressed: () async {
-              final data = await fetchData();
-              _showForm(context, data['name'], data['description']);
+              Navigator.of(context)
+                  .push(
+                MaterialPageRoute(
+                    builder: (context) =>
+                        const FormScreen(name: '', description: '')),
+              )
+                  .then((value) {
+                setState(() {});
+              });
+              //   final data = await fetchData();
+              //   _showForm(context, data['name'], data['description']);
             },
           )
         ],
