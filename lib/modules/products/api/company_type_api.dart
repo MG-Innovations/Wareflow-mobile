@@ -7,10 +7,10 @@ import 'package:wareflow_mobile/utils/dio.dart';
 import 'package:http/http.dart' as http;
 
 class CompanyTypeApi {
-  static Future<List<ProductType>> getCompanysType({
+  static Future<List<CompanyType>> getCompanysType({
     required String query,
   }) async {
-    List<ProductType> company = [];
+    List<CompanyType> company = [];
     try {
       final response = await http.get(
         Uri.parse('http://15.207.99.128:8000/api/v1/company/'),
@@ -29,7 +29,7 @@ class CompanyTypeApi {
 
       if (response.statusCode == 200) {
         for (var item in data["data"]) {
-          company.add(ProductType.fromJson(item));
+          company.add(CompanyType.fromJson(item));
         }
         return company;
       } else {
@@ -55,7 +55,7 @@ class CompanyTypeApi {
       print("Request Data: $companyTypeData");
 
       final response = await dioClient.post(
-        'http://15.207.99.128:8000/api/v1/company/',
+        '/company/',
         data: companyTypeData,
       );
 

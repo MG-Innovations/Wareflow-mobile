@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wareflow_mobile/modules/products/api/company_type_api.dart';
+import 'package:wareflow_mobile/modules/products/models/model_product.dart';
 
 class WidgetCompanyTypeCard extends StatelessWidget {
   final CompanyType companyType;
@@ -18,8 +18,6 @@ class WidgetCompanyTypeCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(companyType.id ?? ''),
-            const SizedBox(height: 8),
             Text(companyType.name ?? ''),
             const SizedBox(height: 8),
             Text(companyType.email ?? ''),
