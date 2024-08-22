@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:wareflow_mobile/modules/customers/api/customer_api.dart';
-import 'package:wareflow_mobile/modules/customers/models/model_customer.dart';
-import 'package:wareflow_mobile/modules/customers/screens/screen_add_customer.dart';
-import 'package:wareflow_mobile/modules/customers/views/widgets/widget_customer_card.dart';
-import 'package:wareflow_mobile/widgets/common_app_bar.dart';
+import 'package:wareflow_mobile/modules/products/api/product_type_api.dart';
+import 'package:wareflow_mobile/modules/products/screens/product_type_form_screen.dart';
+import 'package:wareflow_mobile/modules/products/widget/widget_product_type_card.dart';
 
-class ScreenCustomers extends StatefulWidget {
-  const ScreenCustomers({super.key});
+class ProductTypeListing extends StatefulWidget {
+  const ProductTypeListing({super.key});
 
   @override
-  State<ScreenCustomers> createState() => _ScreenCustomersState();
+  State<ProductTypeListing> createState() => _ProductTypeListingState();
 }
 
-class _ScreenCustomersState extends State<ScreenCustomers> {
+class _ProductTypeListingState extends State<ProductTypeListing> {
   @override
   void initState() {
     super.initState();
@@ -21,19 +19,20 @@ class _ScreenCustomersState extends State<ScreenCustomers> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: const WidgetCommonAppbar(title: "Inventory"),
+      appBar: AppBar(
+        title: const Text('Product Type List'),
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: FutureBuilder<List<ModelCustomer>>(
-          future: CustomerApi.getAllCustomers(query: ''),
+        child: FutureBuilder(
+          future: ProductTypeApi.getProductsType(query: ''),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return const Center(child: Text('No products found'));
+              return const Center(child: Text('No products type found'));
             } else {
               return ListView.builder(
                 itemCount: snapshot.data!.length,
@@ -41,7 +40,7 @@ class _ScreenCustomersState extends State<ScreenCustomers> {
                   final item = snapshot.data![index];
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: WidgetCustomerCard(customer: item),
+                    child: WidgetProductTypeCard(productType: item),
                   );
                 },
               );
@@ -53,7 +52,8 @@ class _ScreenCustomersState extends State<ScreenCustomers> {
         onPressed: () {
           Navigator.of(context)
               .push(
-            MaterialPageRoute(builder: (context) => const ScreenAddCustomer()),
+            MaterialPageRoute(
+                builder: (context) => const ScreenAddProductType()),
           )
               .then((Value) {
             setState(() {});

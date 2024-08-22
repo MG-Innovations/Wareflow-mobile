@@ -27,8 +27,8 @@ class _ScreenLoginState extends State<ScreenLogin> {
   void checkLogin() {
     if (pref!.getString('auth_token') != null) {
       Future.delayed(const Duration(milliseconds: 100), () {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => ScreenHome()));
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => const ScreenHome()));
       });
     }
   }

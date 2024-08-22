@@ -3,12 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:wareflow_mobile/modules/customers/views/screen_customer_listing.dart';
 import 'package:wareflow_mobile/modules/dashboard/views/screen_dashboard.dart';
-import 'package:wareflow_mobile/modules/profile/user_profile.dart';
+import 'package:wareflow_mobile/modules/profile/widget/user_profile.dart';
 import 'package:wareflow_mobile/modules/orders/views/screen_orders.dart';
 import 'package:wareflow_mobile/modules/products/screens/screen_product.dart';
 
 class ScreenHome extends StatefulWidget {
-  ScreenHome({super.key});
+  const ScreenHome({super.key});
 
   @override
   State<ScreenHome> createState() => _ScreenHomeState();
@@ -38,7 +38,9 @@ class _ScreenHomeState extends State<ScreenHome>
               ScreenProducts(),
               ScreenCustomers(),
               ScreenOrderListing(),
-              UserProfile()
+              UserProfile(
+                userId: '',
+              )
             ]))
           ],
         ),

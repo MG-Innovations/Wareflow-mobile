@@ -13,6 +13,23 @@ class Company {
   }
 }
 
+class CompanyType {
+  String? id;
+  String? name;
+  String? email;
+  String? phoneNumber;
+  CompanyType({this.id, this.name, this.email, this.phoneNumber});
+
+  factory CompanyType.fromJson(Map<String, dynamic> json) {
+    return CompanyType(
+      id: json['id'],
+      name: json['name'],
+      email: json['email'],
+      phoneNumber: json['phone_number'],
+    );
+  }
+}
+
 class ProductType {
   String? id;
   String? name;
