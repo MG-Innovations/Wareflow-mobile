@@ -108,30 +108,4 @@ class CompanyTypeApi {
   //     rethrow;
   //   }
   // }
-
-  String name;
-  String email;
-  String phoneNumber;
-
-  CompanyTypeApi({
-    required this.name,
-    required this.email,
-    required this.phoneNumber,
-  });
-
-  factory CompanyTypeApi.fromJson(Map<String, dynamic> json) {
-    return CompanyTypeApi(
-      name: json['name'],
-      email: json['email'],
-      phoneNumber: json['phone_number'],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'email': email,
-      'phone_number': phoneNumber,
-    };
-  }
 }

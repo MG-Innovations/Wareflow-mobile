@@ -28,6 +28,5 @@ class WidgetCompanyTypeCard extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }
