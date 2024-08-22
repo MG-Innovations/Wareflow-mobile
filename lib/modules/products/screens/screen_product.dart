@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:wareflow_mobile/modules/products/api/product_api.dart';
 import 'package:wareflow_mobile/modules/products/models/model_product.dart';
-import 'package:wareflow_mobile/modules/products/screens/product_type_form_screen.dart';
+import 'package:wareflow_mobile/modules/products/screens/company_type_listing.dart';
 import 'package:wareflow_mobile/modules/products/screens/product_type_listing.dart';
 import 'package:wareflow_mobile/modules/products/screens/screen_add_product.dart';
 import 'package:wareflow_mobile/modules/products/screens/screen_form.dart';
@@ -80,14 +80,11 @@ class _ScreenProductsState extends State<ScreenProducts> {
               Navigator.of(context)
                   .push(
                 MaterialPageRoute(
-                    builder: (context) =>
-                        const FormScreen(name: '', description: '')),
+                    builder: (context) => const CompanyTypeListing()),
               )
                   .then((value) {
                 setState(() {});
               });
-              //   final data = await fetchData();
-              //   _showForm(context, data['name'], data['description']);
             },
           )
         ],

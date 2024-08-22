@@ -20,7 +20,7 @@ class _ProductTypeListingState extends State<ProductTypeListing> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product Type Listing'),
+        title: const Text('Product Type List'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),

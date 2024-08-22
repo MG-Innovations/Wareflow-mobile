@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:wareflow_mobile/modules/products/models/model_product.dart';
+import 'package:wareflow_mobile/modules/products/api/company_type_api.dart';
 
-class WidgetProductTypeCard extends StatelessWidget {
-  final ProductType productType;
-  const WidgetProductTypeCard({super.key, required this.productType});
+class WidgetCompanyTypeCard extends StatelessWidget {
+  final CompanyType companyType;
+  const WidgetCompanyTypeCard({super.key, required this.companyType});
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +18,14 @@ class WidgetProductTypeCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(productType.name ?? ''),
+            Text(companyType.id ?? ''),
             const SizedBox(height: 8),
-            Text(productType.description ?? '')
+            Text(companyType.name ?? ''),
+            const SizedBox(height: 8),
+            Text(companyType.email ?? ''),
+            const SizedBox(height: 8),
+            Text(companyType.phoneNumber ?? ''),
+            const SizedBox(height: 8),
           ],
         ),
       ),

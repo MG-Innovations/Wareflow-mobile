@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:developer';
+import 'package:http/http.dart' as http;
 import 'package:wareflow_mobile/modules/products/models/model_product.dart';
 import 'package:wareflow_mobile/utils/dio.dart';
 
@@ -7,28 +10,45 @@ class ProductTypeApi {
   }) async {
     List<ProductType> products = [];
     try {
-      final response = await dioClient.get('/product_type/');
+      final response = await http.get(
+        Uri.parse('http://15.207.99.128:8000/api/v1/product_type/'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization':
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MjQ5NDEwNzYsInVzZXJfaWQiOiI5NWRkNTIwMi1kZGQxLTRiYzItYTg4Ny02MTQwNGFkYTczMDkiLCJ0ZW5hbnRfaWQiOiIxMzVmN2JjYi03YjA4LTRkNjMtODEzMS1lNzVhMjVjYmFjYWQifQ.FG51YoO_wDsg1TLP2rDlvL4zbeVChR5cSuHIka32LCY"
+        },
+      );
+
+      log('Response in product type: $response');
+
+      final data = jsonDecode(response.body);
+
+      log('data: $data');
+
       if (response.statusCode == 200) {
-        for (var item in response.data["data"]) {
+        for (var item in data["data"]) {
           products.add(ProductType.fromJson(item));
         }
         return products;
       } else {
         return [];
       }
+
+      // return [];
     } catch (error) {
+      // log('Error in product type: $error');
       rethrow;
     }
   }
 
   static Future<bool> submitProductType({
-    required String producName,
-    required String productDescription,
+    required String productTypeName,
+    required String productTypeDescription,
   }) async {
     try {
       final productTypeData = {
-        "name": producName,
-        "description": productDescription,
+        "name": productTypeName,
+        "description": productTypeDescription,
       };
 
       print(productTypeData.toString());

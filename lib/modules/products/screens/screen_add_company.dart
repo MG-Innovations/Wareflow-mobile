@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:wareflow_mobile/modules/products/api/company_type_api.dart';
 import 'package:wareflow_mobile/modules/products/api/product_type_api.dart';
 import 'package:wareflow_mobile/utils/helper_functions.dart';
 import 'package:wareflow_mobile/widgets/common_textfield.dart';
 
-class ScreenAddProductType extends StatefulWidget {
-  const ScreenAddProductType({super.key});
+class ScreenAddCompanyType extends StatefulWidget {
+  const ScreenAddCompanyType({super.key});
 
   @override
-  State<ScreenAddProductType> createState() => _ScreenAddProductTypeState();
+  State<ScreenAddCompanyType> createState() => _ScreenAddCompanyTypeState();
 }
 
-class _ScreenAddProductTypeState extends State<ScreenAddProductType> {
+class _ScreenAddCompanyTypeState extends State<ScreenAddCompanyType> {
+  final TextEditingController idController = TextEditingController();
+
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
 
@@ -20,7 +24,7 @@ class _ScreenAddProductTypeState extends State<ScreenAddProductType> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Product Type'),
+        title: const Text('Add Company Type'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
@@ -33,15 +37,21 @@ class _ScreenAddProductTypeState extends State<ScreenAddProductType> {
                   children: [
                     CommonTextfield(
                       controller: nameController,
-                      label: 'Product Name',
-                      hintText: "Enter product type",
+                      label: 'Company Name',
+                      hintText: "Enter Company Name",
+                      compulsory: true,
+                    ),
+                    CommonTextfield(
+                      controller: emailController,
+                      label: 'Company Email',
+                      hintText: "Enter company Email",
                       compulsory: true,
                     ),
                     const SizedBox(height: 10),
                     CommonTextfield(
-                      controller: descriptionController,
-                      hintText: "Enter product description",
-                      label: 'Product Description',
+                      controller: phoneNumberController,
+                      hintText: "Enter company Phone Number",
+                      label: 'Phone Number',
                       compulsory: true,
                     ),
                   ],
@@ -51,16 +61,16 @@ class _ScreenAddProductTypeState extends State<ScreenAddProductType> {
               ElevatedButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
-                      ProductTypeApi.submitProductType(
-                              productTypeName: nameController.text,
-                              productTypeDescription:
-                                  descriptionController.text)
+                      CompanyTypeApi.submitCompanyType(
+                              companyName: nameController.text,
+                              companyEmail: emailController.text,
+                              companyPhonenumber: phoneNumberController.text)
                           .then((value) {
                         if (value) {
                           Navigator.of(context).pop();
                         } else {
                           HFunctions.showSnackbar(
-                            content: "Failed to add product Type",
+                            content: "Failed to add Company Type",
                             context: context,
                           );
                         }
