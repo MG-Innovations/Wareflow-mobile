@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:wareflow_mobile/modules/dashboard/views/widgets/widget_analytic.dart';
-import 'package:wareflow_mobile/modules/orders/views/widgets/widget_order_card.dart';
 import 'package:wareflow_mobile/utils/colors.dart';
 import 'package:wareflow_mobile/widgets/common_app_bar.dart';
 
