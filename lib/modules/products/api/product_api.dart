@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import '../../../utils/dio.dart';
@@ -10,9 +11,10 @@ class InventoryAPI {
   }) async {
     List<ModelProduct> products = [];
     try {
-      final response = await dioClient.get('/product/product?search=$query');
+      final response = await dioClient.get('/product?search=$query');
       if (response.statusCode == 200) {
-        for (var item in response.data["data"]) {
+        final data = jsonDecode(response.body);
+        for (var item in data["data"]) {
           products.add(ModelProduct.fromJson(item));
         }
         return products;
@@ -29,9 +31,11 @@ class InventoryAPI {
   }) async {
     List<ModelDropdown> products = [];
     try {
-      final response = await dioClient.get('/product/product?search=$query');
+      final response = await dioClient.get('/product/?search=$query');
       if (response.statusCode == 200) {
-        for (var item in response.data["data"]) {
+        final data = jsonDecode(response.body);
+        log(data.toString());
+        for (var item in data["data"]) {
           products.add(ModelDropdown(
             id: item["id"],
             name: item["name"],
@@ -67,8 +71,7 @@ class InventoryAPI {
       };
 
       log(productData.toString());
-      final response =
-          await dioClient.post('/product/product', data: productData);
+      final response = await dioClient.post('/product', data: productData);
 
       log(response.toString());
 
@@ -87,7 +90,8 @@ class InventoryAPI {
 
       final response = await dioClient.get('/company');
       if (response.statusCode == 200) {
-        for (var item in response.data["data"]) {
+        final data = jsonDecode(response.body);
+        for (var item in data["data"]) {
           productTypes.add(ModelDropdown.fromJson(item));
         }
       }
@@ -103,7 +107,8 @@ class InventoryAPI {
 
       final response = await dioClient.get('/product_type');
       if (response.statusCode == 200) {
-        for (var item in response.data["data"]) {
+        final data = jsonDecode(response.body);
+        for (var item in data["data"]) {
           companies.add(ModelDropdown.fromJson(item));
         }
       }

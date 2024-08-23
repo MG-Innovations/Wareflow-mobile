@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:wareflow/common/widget_not_found.dart';
 
 import '../../../widgets/common_app_bar.dart';
 import '../../../widgets/common_textfield.dart';
@@ -60,7 +61,8 @@ class _ScreenProductsState extends State<ScreenProducts> {
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Center(child: Text('No products found'));
+                  return const Center(
+                      child: WidgetNotFound(text: "No Products Found"));
                 } else {
                   return ListView.builder(
                     itemCount: snapshot.data!.length,

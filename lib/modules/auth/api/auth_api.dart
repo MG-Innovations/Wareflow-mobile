@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import '../../../utils/dio.dart';
 
 class AuthAPI {
@@ -10,7 +12,8 @@ class AuthAPI {
       });
 
       if (response.statusCode == 200) {
-        return response.data['data']['access_token'];
+        final data = jsonDecode(response.body);
+        return data['data']['access_token'];
       }
 
       return null;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
+import '../../../common/widget_not_found.dart';
 import '../../../widgets/common_app_bar.dart';
 import '../../../widgets/common_textfield.dart';
 import '../api/customer_api.dart';
@@ -59,7 +60,8 @@ class _ScreenCustomersState extends State<ScreenCustomers> {
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Center(child: Text('No products found'));
+                  return const Center(
+                      child: WidgetNotFound(text: "No Customer Found"));
                 } else {
                   return ListView.builder(
                     itemCount: snapshot.data!.length,

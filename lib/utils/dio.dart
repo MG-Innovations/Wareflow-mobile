@@ -1,40 +1,41 @@
-import 'dart:developer';
-import 'package:dio/dio.dart';
+import 'dart:convert';
+
+import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
-final Dio dioClient = Dio(
-  BaseOptions(
-    baseUrl: 'http://15.207.99.128:8000/api/v1',
-  ),
-)..interceptors.add(DioInterceptors());
+class HttpClient {
+  final String baseUrl = 'http://15.207.99.128:8000/api/v1';
 
-class DioInterceptors extends Interceptor {
-  @override
-  void onRequest(
-      RequestOptions options, RequestInterceptorHandler handler) async {
+  Future<String> getAuthToken() async {
     final pref = await SharedPreferences.getInstance();
-    options.headers.addAll({
-      'Content-Type': 'application/json',
-      'Authorization': "Bearer ${pref.getString('auth_token')}"
+    return pref.getString('auth_token')!;
+  }
+
+  Future<Response> get(String path) async {
+    final token = await getAuthToken();
+    final url = Uri.parse('$baseUrl$path');
+    final response = await http.get(url, headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $token",
     });
-    super.onRequest(options, handler);
+
+    return response;
   }
 
-  @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
-    log(
-      'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}',
-    );
-    log('RESPONSE DATA: ${response.data}');
-    return super.onResponse(response, handler);
-  }
+  Future<Response> post(String path,
+      {required Map<String, dynamic> data}) async {
+    final token = await getAuthToken();
+    final url = Uri.parse('$baseUrl$path');
+    final response = await http.post(url,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        },
+        body: jsonEncode(data));
 
-  @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
-    log(
-      'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}',
-    );
-    log('ERROR: ${err.response?.data}');
-    return super.onError(err, handler);
+    return response;
   }
 }
+
+final dioClient = HttpClient();

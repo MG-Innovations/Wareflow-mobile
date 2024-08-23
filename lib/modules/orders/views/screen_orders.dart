@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wareflow/common/widget_not_found.dart';
 
 import '../api/orders_api.dart';
 import '../models/model_order.dart';
@@ -27,7 +28,8 @@ class ScreenOrderListing extends StatelessWidget {
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Center(child: Text('No products found'));
+                  return const Center(
+                      child: WidgetNotFound(text: "No Orders Found"));
                 } else {
                   return ListView.builder(
                     itemCount: snapshot.data!.length,

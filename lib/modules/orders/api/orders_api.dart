@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import '../../../utils/dio.dart';
@@ -28,7 +29,7 @@ class OrderAPI {
 
       log("Payload: $payload");
       final response = await dioClient.post('/order/', data: payload);
-      log("Response: ${response.data}");
+
       if (response.statusCode == 201) {
         return true;
       } else {
@@ -44,16 +45,10 @@ class OrderAPI {
     try {
       final response = await dioClient.get('/order/?limit=10&offset=0');
       if (response.statusCode == 200) {
-        for (var item in response.data["data"]["orders"]) {
+        final data = jsonDecode(response.body);
+        for (var item in data["data"]["orders"]) {
           orders.add(ModelOrder.fromJson(item));
         }
-      }
-      if (response.statusCode == 403) {
-        print("Access forbidden: ${response.data}");
-        // Handle the 403 error specifically
-      } else {
-        // Handle successful response
-        print("Orders: ${response.data}");
       }
       return orders;
     } catch (error, st) {
