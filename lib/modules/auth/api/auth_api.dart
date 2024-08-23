@@ -1,4 +1,4 @@
-import 'package:wareflow_mobile/utils/dio.dart';
+import '../../../utils/dio.dart';
 
 class AuthAPI {
   static Future<String?> loginUser(

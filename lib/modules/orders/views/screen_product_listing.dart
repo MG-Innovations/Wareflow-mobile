@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:wareflow_mobile/modules/products/api/product_api.dart';
-import 'package:wareflow_mobile/modules/products/models/model_product.dart';
-import 'package:wareflow_mobile/modules/products/widget/widget_product_card.dart';
-import 'package:wareflow_mobile/widgets/common_textfield.dart';
+
+import '../../../widgets/common_textfield.dart';
+import '../../products/api/product_api.dart';
+import '../../products/models/model_product.dart';
+import '../../products/widget/widget_product_card.dart';
 
 class ScreenProductListing extends StatefulWidget {
   final Function(List<ModelProduct> productListing) onProductSelected;

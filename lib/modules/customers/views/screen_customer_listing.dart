@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:wareflow_mobile/modules/customers/api/customer_api.dart';
-import 'package:wareflow_mobile/modules/customers/models/model_customer.dart';
-import 'package:wareflow_mobile/modules/customers/views/widgets/widget_customer_card.dart';
-import 'package:wareflow_mobile/widgets/common_app_bar.dart';
-import 'package:wareflow_mobile/widgets/common_textfield.dart';
+
+import '../../../widgets/common_app_bar.dart';
+import '../../../widgets/common_textfield.dart';
+import '../api/customer_api.dart';
+import '../models/model_customer.dart';
+import 'widgets/widget_customer_card.dart';
 
 class ScreenCustomers extends StatefulWidget {
   const ScreenCustomers({super.key});

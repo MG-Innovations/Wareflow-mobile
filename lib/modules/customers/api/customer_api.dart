@@ -1,6 +1,6 @@
-import 'package:wareflow_mobile/modules/customers/models/model_customer.dart';
-import 'package:wareflow_mobile/utils/dio.dart';
-import 'package:wareflow_mobile/widgets/common_textfield.dart';
+import '../../../utils/dio.dart';
+import '../../../widgets/common_textfield.dart';
+import '../models/model_customer.dart';
 
 class CustomerApi {
   static Future<List<ModelCustomer>> getAllCustomers(

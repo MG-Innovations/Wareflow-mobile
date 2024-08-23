@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:wareflow_mobile/common/widget_chip.dart';
-import 'package:wareflow_mobile/common/widget_date.dart';
-import 'package:wareflow_mobile/modules/orders/models/model_order.dart';
-import 'package:wareflow_mobile/modules/orders/views/widgets/widget_key_value.dart';
-import 'package:wareflow_mobile/utils/enums.dart';
+
+import '../../../../common/widget_chip.dart';
+import '../../../../common/widget_date.dart';
+import '../../../../utils/enums.dart';
+import '../../models/model_order.dart';
+import 'widget_key_value.dart';
 
 class WidgetOrderCard extends StatelessWidget {
   final ModelOrder order;

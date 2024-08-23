@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:wareflow_mobile/modules/dashboard/views/widgets/widget_analytic.dart';
-import 'package:wareflow_mobile/utils/colors.dart';
-import 'package:wareflow_mobile/widgets/common_app_bar.dart';
+
+import '../../../utils/colors.dart';
+import '../../../widgets/common_app_bar.dart';
+import 'widgets/widget_analytic.dart';
 
 class ScreenDashboard extends StatelessWidget {
   const ScreenDashboard({super.key});

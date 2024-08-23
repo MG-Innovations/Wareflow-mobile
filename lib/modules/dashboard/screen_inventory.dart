@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wareflow_mobile/modules/dashboard/views/widgets/widget_productitem.dart';
+
+import 'views/widgets/widget_productitem.dart';
 
 class ScreenInventory extends StatelessWidget {
   const ScreenInventory({super.key});

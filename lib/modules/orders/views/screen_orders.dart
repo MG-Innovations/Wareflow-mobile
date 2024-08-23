@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:wareflow_mobile/modules/orders/api/orders_api.dart';
-import 'package:wareflow_mobile/modules/orders/models/model_order.dart';
-import 'package:wareflow_mobile/modules/orders/views/screen_create_order.dart';
-import 'package:wareflow_mobile/modules/orders/views/widgets/widget_order_card.dart';
+
+import '../api/orders_api.dart';
+import '../models/model_order.dart';
+import 'screen_create_order.dart';
+import 'widgets/widget_order_card.dart';
 
 class ScreenOrderListing extends StatelessWidget {
   const ScreenOrderListing({super.key});

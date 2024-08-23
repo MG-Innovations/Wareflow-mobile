@@ -1,9 +1,8 @@
 import 'dart:developer';
 
-import 'package:wareflow_mobile/modules/orders/models/model_order.dart';
-import 'package:wareflow_mobile/modules/orders/views/screen_create_order.dart';
-
 import '../../../utils/dio.dart';
+import '../models/model_order.dart';
+import '../views/screen_create_order.dart';
 
 class OrderAPI {
   static Future<bool> createOrder({
@@ -48,6 +47,13 @@ class OrderAPI {
         for (var item in response.data["data"]["orders"]) {
           orders.add(ModelOrder.fromJson(item));
         }
+      }
+      if (response.statusCode == 403) {
+        print("Access forbidden: ${response.data}");
+        // Handle the 403 error specifically
+      } else {
+        // Handle successful response
+        print("Orders: ${response.data}");
       }
       return orders;
     } catch (error, st) {

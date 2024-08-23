@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:wareflow_mobile/modules/products/api/product_api.dart';
-import 'package:wareflow_mobile/utils/helper_functions.dart';
-import 'package:wareflow_mobile/widgets/common_app_bar.dart';
-import 'package:wareflow_mobile/widgets/common_textfield.dart';
+
+import '../../../utils/helper_functions.dart';
+import '../../../widgets/common_app_bar.dart';
+import '../../../widgets/common_textfield.dart';
+import '../api/product_api.dart';
 
 class ScreenAddProduct extends StatefulWidget {
   const ScreenAddProduct({super.key});

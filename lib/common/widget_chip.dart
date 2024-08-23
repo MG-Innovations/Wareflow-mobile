@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wareflow_mobile/utils/enums.dart';
-import 'package:wareflow_mobile/utils/helper_functions.dart';
+import '../utils/enums.dart';
+import '../utils/helper_functions.dart';
 
 class WidgetChip extends StatelessWidget {
   final Color primary;

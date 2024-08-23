@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wareflow_mobile/modules/auth/views/screen_login.dart';
-import 'package:wareflow_mobile/utils/colors.dart';
+import '../modules/auth/views/screen_login.dart';
+import '../utils/colors.dart';
 
 SharedPreferences? pref;
 void main() async {

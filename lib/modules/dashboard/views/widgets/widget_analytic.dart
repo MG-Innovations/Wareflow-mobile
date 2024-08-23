@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wareflow_mobile/modules/dashboard/views/widgets/widget_icon.dart';
+
+import 'widget_icon.dart';
 
 class WidgetAnalytics extends StatelessWidget {
   final String title;

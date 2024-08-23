@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:wareflow_mobile/modules/products/api/product_api.dart';
-import 'package:wareflow_mobile/modules/products/models/model_product.dart';
-import 'package:wareflow_mobile/modules/products/screens/screen_add_product.dart';
-import 'package:wareflow_mobile/modules/products/widget/widget_product_card.dart';
-import 'package:wareflow_mobile/widgets/common_app_bar.dart';
-import 'package:wareflow_mobile/widgets/common_textfield.dart';
+
+import '../../../widgets/common_app_bar.dart';
+import '../../../widgets/common_textfield.dart';
+import '../api/product_api.dart';
+import '../models/model_product.dart';
+import '../widget/widget_product_card.dart';
+import 'screen_add_product.dart';
 
 class ScreenProducts extends StatefulWidget {
   const ScreenProducts({super.key});
@@ -40,11 +41,11 @@ class _ScreenProductsState extends State<ScreenProducts> {
           CommonTextfield(
             controller: searchController,
             hintText: 'Search products . . .',
-            onChangeValue: (value){
+            onChangeValue: (value) {
               _searchProducts(value);
             },
             prefixIcon: PhosphorIcons.magnifyingGlass(),
-            onSuffixIconPressed: (){
+            onSuffixIconPressed: () {
               searchController.clear();
               _searchProducts('');
             },
@@ -84,8 +85,7 @@ class _ScreenProductsState extends State<ScreenProducts> {
             MaterialPageRoute(builder: (context) => const ScreenAddProduct()),
           )
               .then((value) {
-            setState(() {
-            });
+            setState(() {});
           });
         },
         child: const Icon(Icons.add),

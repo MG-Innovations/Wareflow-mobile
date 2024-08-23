@@ -1,12 +1,12 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:wareflow_mobile/modules/customers/api/customer_api.dart';
-import 'package:wareflow_mobile/modules/orders/api/orders_api.dart';
-import 'package:wareflow_mobile/modules/orders/views/screen_product_listing.dart';
-import 'package:wareflow_mobile/modules/products/models/model_product.dart';
-import 'package:wareflow_mobile/utils/helper_functions.dart';
-import 'package:wareflow_mobile/widgets/common_app_bar.dart';
-import 'package:wareflow_mobile/widgets/common_textfield.dart';
+import '../../../utils/helper_functions.dart';
+import '../../../widgets/common_app_bar.dart';
+import '../../../widgets/common_textfield.dart';
+import '../../customers/api/customer_api.dart';
+import '../../products/models/model_product.dart';
+import '../api/orders_api.dart';
+import 'screen_product_listing.dart';
 
 class ModelProductTableItem {
   final ModelProduct product;
