@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:wareflow_mobile/modules/products/models/model_product.dart';
-import 'package:wareflow_mobile/utils/dio.dart';
-import 'package:http/http.dart' as http;
-import 'package:wareflow_mobile/widgets/common_textfield.dart';
+
+import '../../../utils/dio.dart';
+import '../../../widgets/common_textfield.dart';
+import '../models/model_product.dart';
 
 class InventoryAPI {
   static Future<List<ModelProduct>> getProducts({
@@ -11,19 +11,35 @@ class InventoryAPI {
   }) async {
     List<ModelProduct> products = [];
     try {
-      // final response = await dioClient.get('/product?search=$query');
-      final response = await http.get(
-        Uri.parse('http://15.207.99.128:8000/api/v1/product?search=$query'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization':
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MjQ5NDEwNzYsInVzZXJfaWQiOiI5NWRkNTIwMi1kZGQxLTRiYzItYTg4Ny02MTQwNGFkYTczMDkiLCJ0ZW5hbnRfaWQiOiIxMzVmN2JjYi03YjA4LTRkNjMtODEzMS1lNzVhMjVjYmFjYWQifQ.FG51YoO_wDsg1TLP2rDlvL4zbeVChR5cSuHIka32LCY"
-        },
-      );
-      final data = jsonDecode(response.body);
+      final response = await dioClient.get('/product?search=$query');
       if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
         for (var item in data["data"]) {
           products.add(ModelProduct.fromJson(item));
+        }
+        return products;
+      } else {
+        return [];
+      }
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  static Future<List<ModelDropdown>> getProductsAsDropdown({
+    required String query,
+  }) async {
+    List<ModelDropdown> products = [];
+    try {
+      final response = await dioClient.get('/product/?search=$query');
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        log(data.toString());
+        for (var item in data["data"]) {
+          products.add(ModelDropdown(
+            id: item["id"],
+            name: item["name"],
+          ));
         }
         return products;
       } else {
@@ -73,16 +89,9 @@ class InventoryAPI {
       List<ModelDropdown> companies = [];
 
       // final response = await dioClient.get('/company');
-      final response = await http.get(
-        Uri.parse('http://15.207.99.128:8000/api/v1/company/'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization':
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MjQ5NDEwNzYsInVzZXJfaWQiOiI5NWRkNTIwMi1kZGQxLTRiYzItYTg4Ny02MTQwNGFkYTczMDkiLCJ0ZW5hbnRfaWQiOiIxMzVmN2JjYi03YjA4LTRkNjMtODEzMS1lNzVhMjVjYmFjYWQifQ.FG51YoO_wDsg1TLP2rDlvL4zbeVChR5cSuHIka32LCY"
-        },
-      );
-      final data = jsonDecode(response.body);
+      final response = await dioClient.get('company/');
       if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
         for (var item in data["data"]) {
           companies.add(ModelDropdown.fromJson(item));
         }
@@ -98,16 +107,9 @@ class InventoryAPI {
       List<ModelDropdown> productTypes = [];
 
       // final response = await dioClient.get('/product_type/');
-      final response = await http.get(
-        Uri.parse('http://15.207.99.128:8000/api/v1/product_type/'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization':
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MjQ5NDEwNzYsInVzZXJfaWQiOiI5NWRkNTIwMi1kZGQxLTRiYzItYTg4Ny02MTQwNGFkYTczMDkiLCJ0ZW5hbnRfaWQiOiIxMzVmN2JjYi03YjA4LTRkNjMtODEzMS1lNzVhMjVjYmFjYWQifQ.FG51YoO_wDsg1TLP2rDlvL4zbeVChR5cSuHIka32LCY"
-        },
-      );
-      final data = jsonDecode(response.body);
+      final response = await dioClient.get('/product_type/');
       if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
         for (var item in data["data"]) {
           productTypes.add(ModelDropdown.fromJson(item));
         }

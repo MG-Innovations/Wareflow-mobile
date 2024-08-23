@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wareflow_mobile/modules/products/models/model_product.dart';
 
 class WidgetProductTypeCard extends StatelessWidget {
   final ProductType productType;

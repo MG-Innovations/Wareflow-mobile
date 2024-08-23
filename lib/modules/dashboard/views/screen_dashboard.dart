@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:wareflow_mobile/modules/dashboard/views/widgets/widget_analytic.dart';
-import 'package:wareflow_mobile/modules/orders/views/widgets/widget_order_card.dart';
-import 'package:wareflow_mobile/utils/colors.dart';
-import 'package:wareflow_mobile/widgets/common_app_bar.dart';
+
+import '../../../utils/colors.dart';
+import '../../../widgets/common_app_bar.dart';
+import 'widgets/widget_analytic.dart';
 
 class ScreenDashboard extends StatelessWidget {
   const ScreenDashboard({super.key});
@@ -59,11 +59,11 @@ class ScreenDashboard extends StatelessWidget {
                     fontWeight: FontWeight.w900,
                     color: AppColors.primary)),
             const SizedBox(height: 5),
-            const WidgetOrderCard(),
-            const SizedBox(height: 15),
-            const WidgetOrderCard(),
-            const SizedBox(height: 15),
-            const WidgetOrderCard()
+            // const WidgetOrderCard(),
+            // const SizedBox(height: 15),
+            // const WidgetOrderCard(),
+            // const SizedBox(height: 15),
+            // const WidgetOrderCard()
           ],
         ),
       ),

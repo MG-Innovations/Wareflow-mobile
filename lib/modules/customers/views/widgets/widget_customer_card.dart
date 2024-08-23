@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:wareflow_mobile/modules/customers/models/model_customer.dart';
 
 import '../../../../common/widget_icon_value.dart';
+import '../../models/model_customer.dart';
 
 class WidgetCustomerCard extends StatelessWidget {
   final ModelCustomer customer;

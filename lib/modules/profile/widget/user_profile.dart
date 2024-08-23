@@ -105,8 +105,9 @@
 // user_profile.dart
 
 import 'package:flutter/material.dart';
-import 'package:wareflow_mobile/modules/profile/api/profile_api.dart';
-import 'package:wareflow_mobile/modules/profile/model/model_profile.dart';
+
+import '../api/profile_api.dart';
+import '../model/model_profile.dart';
 
 class UserProfile extends StatefulWidget {
   final String userId;

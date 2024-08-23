@@ -38,17 +38,23 @@
 // }
 
 import 'package:flutter/material.dart';
-import 'package:wareflow_mobile/modules/products/models/model_product.dart';
+
+import '../models/model_product.dart';
 
 class WidgetProductCard extends StatelessWidget {
   final ModelProduct product;
-  const WidgetProductCard({super.key, required this.product});
+  final bool selected;
+  const WidgetProductCard({
+    super.key,
+    required this.product,
+    this.selected = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: selected ? Colors.grey[200] : Colors.white,
         border: Border.all(color: Colors.black),
         borderRadius: BorderRadius.circular(8),
       ),

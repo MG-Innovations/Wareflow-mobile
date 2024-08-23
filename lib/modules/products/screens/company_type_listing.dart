@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:wareflow_mobile/modules/products/api/company_type_api.dart';
-import 'package:wareflow_mobile/modules/products/screens/screen_add_company.dart';
-import 'package:wareflow_mobile/modules/products/widget/widget_company_card.dart';
+import 'package:wareflow/common/widget_not_found.dart';
+import 'package:wareflow/modules/products/screens/screen_add_company.dart';
+
+import '../api/company_type_api.dart';
+import '../widget/widget_company_card.dart';
 
 class CompanyTypeListing extends StatefulWidget {
   const CompanyTypeListing({super.key});
@@ -32,7 +34,8 @@ class _CompanyTypeListingState extends State<CompanyTypeListing> {
             } else if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return const Center(child: Text('No company type found'));
+              return const Center(
+                  child: WidgetNotFound(text: 'No Customer Found'));
             } else {
               return ListView.builder(
                 itemCount: snapshot.data!.length,

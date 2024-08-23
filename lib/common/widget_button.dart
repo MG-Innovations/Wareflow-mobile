@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wareflow_mobile/utils/colors.dart';
+
+import '../utils/colors.dart';
 
 class WidgetButton extends StatelessWidget {
   final String title;

@@ -30,8 +30,11 @@ class CommonTextfield extends StatefulWidget {
   final IconData? prefixIcon;
   final Function(ModelDropdown item)? onSelectDropdown;
   final Function(String value)? onChangeValue;
+  final Function? onTap;
   final List<ModelDropdown>? dropdownList;
   final Future<List<ModelDropdown>>? fetchDropdown;
+  final TextEditingController? searchController;
+  final bool searchInNetwork;
   final String? regex;
 
   const CommonTextfield({
@@ -42,6 +45,8 @@ class CommonTextfield extends StatefulWidget {
     this.onChangeValue,
     this.dropdownList,
     this.fetchDropdown,
+    this.searchInNetwork = false,
+    this.searchController,
     this.compulsory = false,
     this.type = FieldType.text,
     this.keyboardType = TextInputType.text,
@@ -49,6 +54,7 @@ class CommonTextfield extends StatefulWidget {
     this.regex,
     this.onSuffixIconPressed,
     this.suffixIcon,
+    this.onTap,
     this.onSelectDropdown,
   });
 
@@ -69,7 +75,9 @@ class _CommonTextfieldState extends State<CommonTextfield> {
   Future<void> _loadDropdownData() async {
     if (widget.fetchDropdown != null) {
       try {
+        log("Searching Function: ${widget.fetchDropdown}");
         dropdownList = await widget.fetchDropdown!;
+        log("Searching Function2 : ${dropdownList.toString()}");
       } catch (e) {
         log("Error fetching dropdown data: $e");
       }
@@ -78,7 +86,7 @@ class _CommonTextfieldState extends State<CommonTextfield> {
     }
 
     setState(() {
-      isLoadingDropdown = false; // Dropdown data has been loaded
+      isLoadingDropdown = false;
     });
   }
 
@@ -89,7 +97,8 @@ class _CommonTextfieldState extends State<CommonTextfield> {
       return;
     }
 
-    TextEditingController searchController = TextEditingController();
+    TextEditingController searchController =
+        widget.searchController ?? TextEditingController();
     List<ModelDropdown> filteredList = dropdownList;
 
     final selectedValue = await showDialog<ModelDropdown>(
@@ -125,13 +134,18 @@ class _CommonTextfieldState extends State<CommonTextfield> {
                     TextField(
                       controller: searchController,
                       onChanged: (value) {
-                        setState(() {
-                          filteredList = dropdownList
-                              .where((item) => item.name
-                                  .toLowerCase()
-                                  .contains(value.toLowerCase()))
-                              .toList();
-                        });
+                        if (widget.searchInNetwork) {
+                          log("Searching in network");
+                          _loadDropdownData();
+                        } else {
+                          setState(() {
+                            filteredList = dropdownList
+                                .where((item) => item.name
+                                    .toLowerCase()
+                                    .contains(value.toLowerCase()))
+                                .toList();
+                          });
+                        }
                       },
                       decoration: InputDecoration(
                         hintText: 'Search...',
@@ -214,7 +228,10 @@ class _CommonTextfieldState extends State<CommonTextfield> {
         if (widget.label != null) const SizedBox(height: 5),
         GestureDetector(
           onTap: () {
-            if (widget.type == FieldType.dropdown && !isLoadingDropdown) {
+            if (widget.onTap != null) {
+              widget.onTap!();
+            } else if (widget.type == FieldType.dropdown &&
+                !isLoadingDropdown) {
               _showDropdownDialog();
             }
           },
@@ -233,8 +250,8 @@ class _CommonTextfieldState extends State<CommonTextfield> {
                 }
                 return null;
               },
-              onChanged: (value){
-                if(widget.onChangeValue != null){
+              onChanged: (value) {
+                if (widget.onChangeValue != null) {
                   widget.onChangeValue!(value);
                 }
               },
@@ -242,7 +259,8 @@ class _CommonTextfieldState extends State<CommonTextfield> {
                 hintText: isLoadingDropdown && widget.type == FieldType.dropdown
                     ? 'Loading...'
                     : widget.hintText,
-                prefixIcon: widget.prefixIcon != null ? Icon(widget.prefixIcon):null,
+                prefixIcon:
+                    widget.prefixIcon != null ? Icon(widget.prefixIcon) : null,
                 hintStyle: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,

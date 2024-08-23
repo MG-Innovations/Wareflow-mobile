@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:wareflow_mobile/modules/products/api/product_type_api.dart';
-import 'package:wareflow_mobile/modules/products/screens/product_type_form_screen.dart';
-import 'package:wareflow_mobile/modules/products/widget/widget_product_type_card.dart';
+import 'package:wareflow/common/widget_not_found.dart';
+
+import '../api/product_type_api.dart';
+import '../widget/widget_product_type_card.dart';
+import 'product_type_form_screen.dart';
 
 class ProductTypeListing extends StatefulWidget {
   const ProductTypeListing({super.key});
@@ -32,7 +34,8 @@ class _ProductTypeListingState extends State<ProductTypeListing> {
             } else if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return const Center(child: Text('No products type found'));
+              return const Center(
+                  child: WidgetNotFound(text: 'No Products Type Found'));
             } else {
               return ListView.builder(
                 itemCount: snapshot.data!.length,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:wareflow_mobile/modules/products/api/company_type_api.dart';
-import 'package:wareflow_mobile/modules/products/api/product_type_api.dart';
-import 'package:wareflow_mobile/utils/helper_functions.dart';
-import 'package:wareflow_mobile/widgets/common_textfield.dart';
+
+import '../../../utils/helper_functions.dart';
+import '../../../widgets/common_textfield.dart';
+import '../api/company_type_api.dart';
 
 class ScreenAddCompanyType extends StatefulWidget {
   const ScreenAddCompanyType({super.key});

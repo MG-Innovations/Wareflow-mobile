@@ -1,52 +1,6 @@
-// import 'dart:math';
-// import 'package:wareflow_mobile/modules/customers/model.dart';
-// import 'package:wareflow_mobile/utils/dio.dart';
-
-// class CustomerAPI {
-//   static Future<List<ModelCustomer>> getCustomers() async {
-//     List<ModelCustomer> customers = [];
-//     try {
-//       final response = await dioClient.get('/customer/');
-//       if (response.statusCode == 200) {
-//         for (var item in response.data["data"]) {
-//           customers.add(ModelCustomer.fromJson(item));
-//         }
-//         return customers;
-//       } else {
-//         return [];
-//       }
-//     } catch (error) {
-//       rethrow;
-//     }
-//   }
-
-//   // static Future<void> postData({
-//   //   required String customerName,
-//   //   required String customerEmail,
-//   //  }) async {
-//   //   try {
-//   //     final customerData = {
-//   //       "name": customerName,
-//   //       "email": customerEmail,
-//   //     };
-
-//   //     log(customerData.toString());
-//   //     final response = await dioClient.post('/customer/', data: customerData);
-
-//   //     log(response.toString());
-
-//   //     if (response.statusCode == 200) {
-//   //       return true;
-//   //     }
-//   //     return false;
-//   //   } catch (e) {
-//   //     rethrow;
-//   //   }
-//   // }
-// }
-
-import 'package:wareflow_mobile/modules/customers/model.dart';
-import 'package:wareflow_mobile/utils/dio.dart';
+import 'dart:convert';
+import '../../utils/dio.dart';
+import 'model.dart';
 
 class CustomerAPI {
   static Future<List<ModelCustomer>> getCustomers() async {
@@ -54,7 +8,8 @@ class CustomerAPI {
     try {
       final response = await dioClient.get('/customer/');
       if (response.statusCode == 200) {
-        for (var item in response.data["data"]) {
+        final data = jsonDecode(response.body);
+        for (var item in data["data"]) {
           customers.add(ModelCustomer.fromJson(item));
         }
         return customers;

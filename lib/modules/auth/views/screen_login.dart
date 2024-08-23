@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:wareflow_mobile/main.dart';
-import 'package:wareflow_mobile/modules/auth/api/auth_api.dart';
-import 'package:wareflow_mobile/modules/home/views/screen_home.dart';
-import 'package:wareflow_mobile/utils/helper_functions.dart';
-import 'package:wareflow_mobile/widgets/common_textfield.dart';
+import '../../../main.dart';
+import '../../../utils/helper_functions.dart';
+import '../../../widgets/common_textfield.dart';
+import '../../home/views/screen_home.dart';
+import '../api/auth_api.dart';
 
 class ScreenLogin extends StatefulWidget {
   const ScreenLogin({super.key});

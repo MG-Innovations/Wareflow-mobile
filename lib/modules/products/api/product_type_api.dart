@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:http/http.dart' as http;
-import 'package:wareflow_mobile/modules/products/models/model_product.dart';
-import 'package:wareflow_mobile/utils/dio.dart';
+
+import '../../../utils/dio.dart';
+import '../models/model_product.dart';
 
 class ProductTypeApi {
   static Future<List<ProductType>> getProductsType({
@@ -10,14 +10,7 @@ class ProductTypeApi {
   }) async {
     List<ProductType> products = [];
     try {
-      final response = await http.get(
-        Uri.parse('http://15.207.99.128:8000/api/v1/product_type/'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization':
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MjQ5NDEwNzYsInVzZXJfaWQiOiI5NWRkNTIwMi1kZGQxLTRiYzItYTg4Ny02MTQwNGFkYTczMDkiLCJ0ZW5hbnRfaWQiOiIxMzVmN2JjYi03YjA4LTRkNjMtODEzMS1lNzVhMjVjYmFjYWQifQ.FG51YoO_wDsg1TLP2rDlvL4zbeVChR5cSuHIka32LCY"
-        },
-      );
+      final response = await dioClient.get('/product_type/');
 
       log('Response in product type: $response');
 

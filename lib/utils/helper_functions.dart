@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wareflow_mobile/utils/enums.dart';
+import '../utils/enums.dart';
 
 class HFunctions {
   static String getChipText({required EnumChipType type}) {

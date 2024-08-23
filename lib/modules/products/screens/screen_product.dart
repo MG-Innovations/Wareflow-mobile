@@ -1,16 +1,16 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:wareflow_mobile/modules/products/api/product_api.dart';
-import 'package:wareflow_mobile/modules/products/models/model_product.dart';
-import 'package:wareflow_mobile/modules/products/screens/company_type_listing.dart';
-import 'package:wareflow_mobile/modules/products/screens/product_type_listing.dart';
-import 'package:wareflow_mobile/modules/products/screens/screen_add_product.dart';
-import 'package:wareflow_mobile/modules/products/screens/screen_form.dart';
-import 'package:wareflow_mobile/modules/products/widget/widget_product_card.dart';
-import 'package:wareflow_mobile/widgets/common_textfield.dart';
-import 'package:http/http.dart' as http;
+import 'package:wareflow/common/widget_not_found.dart';
+import 'package:wareflow/utils/dio.dart';
+import '../../../widgets/common_textfield.dart';
+import '../api/product_api.dart';
+import '../models/model_product.dart';
+import '../widget/widget_product_card.dart';
+import 'company_type_listing.dart';
+import 'product_type_listing.dart';
+import 'screen_add_product.dart';
+import 'screen_form.dart';
 
 class ScreenProducts extends StatefulWidget {
   const ScreenProducts({super.key});
@@ -36,7 +36,7 @@ class _ScreenProductsState extends State<ScreenProducts> {
   }
 
   Future<Map<String, dynamic>> fetchData() async {
-    final response = await http.get(Uri.parse('product_type/'));
+    final response = await dioClient.get('product_type/');
 
     if (response.statusCode == 200) {
       return json.decode(response.body)['data'];
@@ -113,7 +113,8 @@ class _ScreenProductsState extends State<ScreenProducts> {
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Center(child: Text('No products found'));
+                  return const Center(
+                      child: WidgetNotFound(text: "No Products Found"));
                 } else {
                   return ListView.builder(
                     itemCount: snapshot.data!.length,
