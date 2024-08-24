@@ -1,8 +1,5 @@
-import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
-
 import 'package:flutter/material.dart';
 import 'package:wareflow/common/widget_not_found.dart';
-
 import '../api/orders_api.dart';
 import '../models/model_order.dart';
 import 'screen_create_order.dart';
@@ -47,9 +44,7 @@ class ScreenOrderListing extends StatelessWidget {
                                     .push(MaterialPageRoute(
                                         builder: (context) =>
                                             ScreenOrderDetails(order: item)))
-                                    .then((_) {
-                                  snapshot.call();
-                                });
+                                    .then((value) {});
                               }
                             },
                             child: WidgetOrderCard(order: item),
