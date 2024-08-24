@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../utils/helper_functions.dart';
 import '../../../widgets/common_textfield.dart';
-import '../api.dart';
+import '../api/customer_api.dart';
 
 class ScreenAddCustomer extends StatefulWidget {
   const ScreenAddCustomer({super.key});
@@ -52,7 +52,7 @@ class _ScreenAddCustomerState extends State<ScreenAddCustomer> {
               ElevatedButton(
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
-                    CustomerAPI.submitCustomer(
+                    CustomerApi.submitCustomer(
                             customerName: nameController.text,
                             customerNumber: numberController.text)
                         .then((success) {

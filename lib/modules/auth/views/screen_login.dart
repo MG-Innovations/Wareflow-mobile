@@ -96,8 +96,8 @@ class _ScreenLoginState extends State<ScreenLogin> {
           pref!.setString('auth_token', value);
           HFunctions.showSnackbar(
               context: context, content: "Login Successfully");
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => ScreenHome()));
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => const ScreenHome()));
           setState(() {
             isLoading = false;
           });

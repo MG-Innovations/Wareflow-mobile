@@ -1,4 +1,4 @@
-enum EnumChipType {
+enum EnumPaymentStatus {
   // Orders
   paymentPending,
   paymentPartial,

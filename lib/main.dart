@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
         // textTheme: GoogleFonts.montserratTextTheme().copyWith(),
       ),
       home: const ScreenLogin(),
+      routes: {'/login': (context) => const ScreenLogin()},
     );
   }
 }

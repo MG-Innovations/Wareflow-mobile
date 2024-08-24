@@ -4,11 +4,10 @@ import '../model/model_profile.dart';
 
 class ApiProfile {
   Future<ModelProfile?> fetchUserProfile(String userId) async {
-    final response = await dioClient.get('/user/$userId');
-
+    final response = await dioClient.get('/user/');
     if (response.statusCode == 200) {
-      final Map<String, dynamic> profileJson = json.decode(response.body);
-      return ModelProfile.fromJson(profileJson);
+      final data = json.decode(response.body);
+      return ModelProfile.fromJson(data["data"]);
     } else {
       return null;
     }

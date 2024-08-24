@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:wareflow/modules/profile/widget/user_profile.dart';
 
-import '../../customers/views/screen_customer_listing.dart';
+import '../../customers/screens/screen_customer_listing.dart';
 import '../../dashboard/views/screen_dashboard.dart';
 import '../../orders/views/screen_orders.dart';
 import '../../products/screens/screen_product.dart';

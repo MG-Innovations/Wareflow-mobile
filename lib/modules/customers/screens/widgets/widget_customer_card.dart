@@ -36,11 +36,11 @@ class WidgetCustomerCard extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: Colors.black),
               ),
-              WidgetIconValue(
-                  primaryColor: Colors.green.shade400,
-                  iconData: PhosphorIcons.arrowCircleDownLeft(
-                      PhosphorIconsStyle.fill),
-                  value: "\$20,000"),
+              // WidgetIconValue(
+              //     primaryColor: Colors.green.shade400,
+              //     iconData: PhosphorIcons.arrowCircleDownLeft(
+              //         PhosphorIconsStyle.fill),
+              //     value: "\$20,000"),
             ],
           ),
           const Divider(),

@@ -139,7 +139,7 @@ class _ScreenProductsState extends State<ScreenProducts> {
             MaterialPageRoute(builder: (context) => const ScreenAddProduct()),
           )
               .then((value) {
-            setState(() {});
+            _searchProducts(searchController.text);
           });
         },
         child: const Icon(Icons.add),

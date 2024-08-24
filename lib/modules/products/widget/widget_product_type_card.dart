@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../models/model_product.dart';
+
 class WidgetProductTypeCard extends StatelessWidget {
   final ProductType productType;
   const WidgetProductTypeCard({super.key, required this.productType});
@@ -24,6 +26,5 @@ class WidgetProductTypeCard extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

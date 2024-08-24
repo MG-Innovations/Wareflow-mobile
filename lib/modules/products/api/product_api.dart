@@ -70,11 +70,7 @@ class InventoryAPI {
         "product_type_id": productTypeId
       };
 
-      log(productData.toString());
-      final response = await dioClient.post('/product', data: productData);
-
-      log(response.toString());
-
+      final response = await dioClient.post('/product/', data: productData);
       if (response.statusCode == 201) {
         return true;
       }
@@ -88,8 +84,7 @@ class InventoryAPI {
     try {
       List<ModelDropdown> companies = [];
 
-      // final response = await dioClient.get('/company');
-      final response = await dioClient.get('company/');
+      final response = await dioClient.get('/company/');
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         for (var item in data["data"]) {

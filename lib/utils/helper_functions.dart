@@ -2,18 +2,31 @@ import 'package:flutter/material.dart';
 import '../utils/enums.dart';
 
 class HFunctions {
-  static String getChipText({required EnumChipType type}) {
+  static String getChipText({required EnumPaymentStatus type}) {
     switch (type) {
-      case EnumChipType.paymentPending:
+      case EnumPaymentStatus.paymentPending:
         return "Payment Pending";
-      case EnumChipType.paymentPartial:
+      case EnumPaymentStatus.paymentPartial:
         return "Partially Payed";
-      case EnumChipType.paymentCompleted:
+      case EnumPaymentStatus.paymentCompleted:
         return "Payment Completed";
-      case EnumChipType.productOutOfStock:
+      case EnumPaymentStatus.productOutOfStock:
         return "Out of Stock";
-      case EnumChipType.productLowStock:
+      case EnumPaymentStatus.productLowStock:
         return "Low Stock";
+    }
+  }
+
+  static EnumPaymentStatus getPaymentStatus(String status) {
+    switch (status) {
+      case 'Unpaid':
+        return EnumPaymentStatus.paymentPending;
+      case 'Partially Paid':
+        return EnumPaymentStatus.paymentPartial;
+      case 'Paid':
+        return EnumPaymentStatus.paymentCompleted;
+      default:
+        return EnumPaymentStatus.paymentPending;
     }
   }
 

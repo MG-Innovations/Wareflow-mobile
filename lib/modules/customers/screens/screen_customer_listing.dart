@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-
 import '../../../common/widget_not_found.dart';
 import '../../../widgets/common_app_bar.dart';
 import '../../../widgets/common_textfield.dart';
 import '../api/customer_api.dart';
 import '../models/model_customer.dart';
-import '../screens/screen_add_customer.dart';
+import 'screen_add_customer.dart';
 import 'widgets/widget_customer_card.dart';
 
 class ScreenCustomers extends StatefulWidget {
@@ -26,7 +25,7 @@ class _ScreenCustomersState extends State<ScreenCustomers> {
     futureProducts = CustomerApi.getAllCustomers(query: '');
   }
 
-  void _searchProducts(String query) {
+  void _searchCustomers(String query) {
     setState(() {
       futureProducts = CustomerApi.getAllCustomers(query: query);
     });
@@ -41,14 +40,14 @@ class _ScreenCustomersState extends State<ScreenCustomers> {
         children: [
           CommonTextfield(
             controller: searchController,
-            hintText: 'Search products . . .',
+            hintText: 'Search customers . . .',
             onChangeValue: (value) {
-              _searchProducts(value);
+              _searchCustomers(value);
             },
             prefixIcon: PhosphorIcons.magnifyingGlass(),
             onSuffixIconPressed: () {
               searchController.clear();
-              _searchProducts('');
+              _searchCustomers('');
             },
             suffixIcon: PhosphorIcons.x(),
           ),
@@ -86,8 +85,8 @@ class _ScreenCustomersState extends State<ScreenCustomers> {
               .push(
             MaterialPageRoute(builder: (context) => const ScreenAddCustomer()),
           )
-              .then((Value) {
-            setState(() {});
+              .then((value) {
+            _searchCustomers(searchController.text);
           });
         },
         child: const Icon(Icons.add),

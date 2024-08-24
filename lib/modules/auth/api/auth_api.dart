@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import '../../../utils/dio.dart';
 
@@ -18,6 +19,7 @@ class AuthAPI {
 
       return null;
     } catch (error) {
+      log('Error: $error');
       rethrow;
     }
   }

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import '../../../utils/dio.dart';
 import '../../../widgets/common_textfield.dart';
@@ -37,6 +38,28 @@ class CustomerApi {
 
       return customers;
     } catch (error) {
+      rethrow;
+    }
+  }
+
+  static Future<bool> submitCustomer({
+    required String customerName,
+    required String customerNumber,
+  }) async {
+    try {
+      final customerData = {
+        "name": customerName,
+        "phone_number": customerNumber,
+      };
+
+      final response = await dioClient.post('/customer/', data: customerData);
+
+      if (response.statusCode == 201) {
+        log('Customer added successfully: ${response.body}');
+        return true;
+      }
+      return false;
+    } catch (e) {
       rethrow;
     }
   }
