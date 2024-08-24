@@ -30,6 +30,19 @@ class HFunctions {
     }
   }
 
+  static EnumPaymentType getPaymentType(String paymentType) {
+    switch (paymentType) {
+      case 'UPI':
+        return EnumPaymentType.upi;
+      case 'Card':
+        return EnumPaymentType.card;
+      case 'Cash':
+        return EnumPaymentType.cash;
+      default:
+        return EnumPaymentType.cash;
+    }
+  }
+
   static void showSnackbar(
       {required BuildContext context,
       required String content,

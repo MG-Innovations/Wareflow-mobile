@@ -1,9 +1,12 @@
+import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
+
 import 'package:flutter/material.dart';
 import 'package:wareflow/common/widget_not_found.dart';
 
 import '../api/orders_api.dart';
 import '../models/model_order.dart';
 import 'screen_create_order.dart';
+import 'screen_order_details.dart';
 import 'widgets/widget_order_card.dart';
 
 class ScreenOrderListing extends StatelessWidget {
@@ -36,9 +39,21 @@ class ScreenOrderListing extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final item = snapshot.data![index];
                       return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: WidgetOrderCard(order: item),
-                      );
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: InkWell(
+                            onTap: () {
+                              if (item.balance > 0) {
+                                Navigator.of(context)
+                                    .push(MaterialPageRoute(
+                                        builder: (context) =>
+                                            ScreenOrderDetails(order: item)))
+                                    .then((_) {
+                                  snapshot.call();
+                                });
+                              }
+                            },
+                            child: WidgetOrderCard(order: item),
+                          ));
                     },
                   );
                 }

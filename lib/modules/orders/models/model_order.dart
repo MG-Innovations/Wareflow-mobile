@@ -8,7 +8,7 @@ class ModelOrder {
   final double orderValue;
   final EnumPaymentStatus status;
   final DateTime createdAt;
-  final double balance;
+  double balance;
   final ModelCustomer customer;
   final int itemCount;
 
