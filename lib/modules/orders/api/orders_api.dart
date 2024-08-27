@@ -56,4 +56,21 @@ class OrderAPI {
       rethrow;
     }
   }
+
+  static Future<List<ModelOrder>> getWeeklyOrders() async{
+    List<ModelOrder> orders = [];
+    try{
+      final response = await dioClient.get('/orders/weekly');
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        for (var item in data["data"]) {
+          orders.add(ModelOrder.fromJson(item));
+        }
+      }
+      return orders;
+    }catch(error,st){
+      log("Error: $error Stacktrace: ${st}");
+      rethrow;
+    }
+  }
 }

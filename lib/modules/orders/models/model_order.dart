@@ -9,7 +9,7 @@ class ModelOrder {
   final EnumPaymentStatus status;
   final DateTime createdAt;
   double balance;
-  final ModelCustomer customer;
+  final ModelCustomer? customer;
   final int itemCount;
 
   ModelOrder({
@@ -19,7 +19,7 @@ class ModelOrder {
     required this.createdAt,
     required this.balance,
     required this.itemCount,
-    required this.customer,
+    this.customer,
   });
 
   factory ModelOrder.fromJson(Map<String, dynamic> json) {
@@ -29,8 +29,8 @@ class ModelOrder {
       status: HFunctions.getPaymentStatus(json['status']),
       createdAt: DateTime.parse(json['created_at']),
       balance: json['order_value'] - json['amount_received'],
-      itemCount: json['order_items_count'],
-      customer: ModelCustomer.fromJson(json['customer_details']),
+      itemCount: json['order_items_count'] ?? 0,
+      customer: json['customer_details'] != null ?ModelCustomer.fromJson(json['customer_details']):null,
     );
   }
 }

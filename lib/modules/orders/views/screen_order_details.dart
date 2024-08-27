@@ -40,11 +40,11 @@ class _ScreenOrderDetailsState extends State<ScreenOrderDetails> {
                   children: [
                     WidgetKeyValue(
                         keyString: "Customer Name",
-                        value: widget.order.customer.name),
+                        value: widget.order.customer?.name ?? "NA"),
                     const SizedBox(height: 5),
                     WidgetKeyValue(
                         keyString: "Customer Contact Info",
-                        value: widget.order.customer.phoneNumber),
+                        value: widget.order.customer?.phoneNumber ?? "NA"),
                     const SizedBox(height: 5),
                     WidgetKeyValue(
                         keyString: "Total order value",

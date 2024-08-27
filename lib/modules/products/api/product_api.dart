@@ -114,4 +114,36 @@ class InventoryAPI {
       rethrow;
     }
   }
+
+  static Future<bool> updateProduct(
+      {required String productId,
+      required String producName,
+      required String productDescription,
+      required String productTypeId,
+      required String productCompanyNameId,
+      required String sellingPrice,
+      required String buyingPrice,
+      required String initialStock}) async {
+    try {
+      final productData = {
+        "name": producName,
+        "description": productDescription,
+        "buying_price": double.parse(buyingPrice),
+        "selling_price": double.parse(sellingPrice),
+        "stock": double.parse(initialStock),
+        "image": "",
+        "company_id": productCompanyNameId,
+        "product_type_id": productTypeId
+      };
+
+      final response =
+          await dioClient.put('/product/$productId', data: productData);
+      if (response.statusCode == 200) {
+        return true;
+      }
+      return false;
+    } catch (error) {
+      rethrow;
+    }
+  }
 }

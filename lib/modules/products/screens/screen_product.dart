@@ -122,7 +122,17 @@ class _ScreenProductsState extends State<ScreenProducts> {
                       final item = snapshot.data![index];
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: WidgetProductCard(product: item),
+                        child: InkWell(
+                            onTap: () {
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(
+                                      builder: (ctx) =>
+                                          ScreenAddProduct(product: item)))
+                                  .then((value) {
+                                setState(() {});
+                              });
+                            },
+                            child: WidgetProductCard(product: item)),
                       );
                     },
                   );

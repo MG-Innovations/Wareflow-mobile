@@ -36,6 +36,20 @@ class HttpClient {
 
     return response;
   }
+
+  Future<Response> put(String path,
+      {required Map<String, dynamic> data}) async {
+    final token = await getAuthToken();
+    final url = Uri.parse('$baseUrl$path');
+    final response = await http.put(url,
+        headers: {
+          "Content-Type": "application/json",
+          if (token != null) "Authorization": "Bearer $token",
+        },
+        body: jsonEncode(data));
+
+    return response;
+  }
 }
 
 final dioClient = HttpClient();

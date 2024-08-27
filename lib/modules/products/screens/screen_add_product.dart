@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-
+import 'package:wareflow/modules/products/models/model_product.dart';
 import '../../../utils/helper_functions.dart';
 import '../../../widgets/common_app_bar.dart';
 import '../../../widgets/common_textfield.dart';
 import '../api/product_api.dart';
 
 class ScreenAddProduct extends StatefulWidget {
-  const ScreenAddProduct({super.key});
+  final ModelProduct? product;
+  const ScreenAddProduct({super.key, this.product});
 
   @override
   State<ScreenAddProduct> createState() => _ScreenAddProductState();
@@ -20,13 +21,37 @@ class _ScreenAddProductState extends State<ScreenAddProduct> {
       TextEditingController();
   final TextEditingController sellingPriceController = TextEditingController();
   final TextEditingController buyingPriceController = TextEditingController();
-  final TextEditingController companyController = TextEditingController();
-  final TextEditingController categoryController = TextEditingController();
   final TextEditingController initialStockController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
 
   ModelDropdown? productType, company;
+
+  void initialize() {
+    if (widget.product != null) {
+      nameController.text = widget.product?.name ?? "";
+      descriptionController.text = widget.product?.description ?? "";
+      productTypeController.text = widget.product?.productType?.name ?? "";
+      productCompanyController.text = widget.product?.company?.name ?? "";
+      sellingPriceController.text =
+          widget.product?.sellingPrice.toString() ?? "";
+      buyingPriceController.text = widget.product?.buyingPrice.toString() ?? "";
+      initialStockController.text = widget.product?.stock.toString() ?? "";
+      productType = ModelDropdown(
+          id: widget.product!.productType!.id!,
+          name: widget.product!.productType!.name!);
+
+      company = ModelDropdown(
+          id: widget.product!.company!.id!,
+          name: widget.product!.company!.name!);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initialize();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,8 +135,11 @@ class _ScreenAddProductState extends State<ScreenAddProduct> {
                       const SizedBox(height: 10),
                       CommonTextfield(
                         controller: initialStockController,
-                        label: 'Initial stock',
-                        hintText: "Enter initial stock",
+                        label:
+                            widget.product != null ? 'Stock' : 'Initial stock',
+                        hintText: widget.product != null
+                            ? "Enter Stock"
+                            : "Enter initial stock",
                         compulsory: true,
                         keyboardType: TextInputType.number,
                       ),
@@ -122,27 +150,51 @@ class _ScreenAddProductState extends State<ScreenAddProduct> {
                 ElevatedButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
-                      InventoryAPI.submitProduct(
-                              producName: nameController.text,
-                              productDescription: descriptionController.text,
-                              productTypeId: productType!.id,
-                              productCompanyNameId: company!.id,
-                              sellingPrice: sellingPriceController.text,
-                              buyingPrice: buyingPriceController.text,
-                              initialStock: initialStockController.text)
-                          .then((value) {
-                        if (value) {
-                          Navigator.of(context).pop();
-                        } else {
-                          HFunctions.showSnackbar(
-                            content: "Failed to add product",
-                            context: context,
-                          );
-                        }
-                      });
+                      if (widget.product == null) {
+                        InventoryAPI.submitProduct(
+                                producName: nameController.text,
+                                productDescription: descriptionController.text,
+                                productTypeId: productType!.id,
+                                productCompanyNameId: company!.id,
+                                sellingPrice: sellingPriceController.text,
+                                buyingPrice: buyingPriceController.text,
+                                initialStock: initialStockController.text)
+                            .then((value) {
+                          if (value) {
+                            Navigator.of(context).pop();
+                          } else {
+                            HFunctions.showSnackbar(
+                              content: "Failed to add product",
+                              context: context,
+                            );
+                          }
+                        });
+                      } else {
+                        InventoryAPI.updateProduct(
+                          productId: widget.product!.id!,
+                          producName: nameController.text,
+                          productDescription: descriptionController.text,
+                          productTypeId: productType!.id,
+                          productCompanyNameId: company!.id,
+                          sellingPrice: sellingPriceController.text,
+                          buyingPrice: buyingPriceController.text,
+                          initialStock: initialStockController.text,
+                        ).then((value) {
+                          if (value) {
+                            Navigator.of(context).pop();
+                          } else {
+                            HFunctions.showSnackbar(
+                                context: context,
+                                success: false,
+                                content: "Error in updating product");
+                          }
+                        });
+                      }
                     }
                   },
-                  child: const Text("Add Product"),
+                  child: Text(widget.product != null
+                      ? "Update Product"
+                      : "Add Product"),
                 )
               ],
             ),

@@ -50,6 +50,7 @@ class HFunctions {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(content),
+        backgroundColor: success ? Colors.green : Colors.red,
         duration: const Duration(seconds: 1),
       ),
     );

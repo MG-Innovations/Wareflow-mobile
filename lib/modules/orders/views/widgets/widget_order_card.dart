@@ -30,13 +30,13 @@ class WidgetOrderCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                order.customer.name,
+                order.customer?.name ?? "NA",
                 style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.black),
               ),
-              WidgetDate(date: DateTime.now())
+              WidgetDate(date: order.createdAt)
             ],
           ),
           const SizedBox(height: 5),

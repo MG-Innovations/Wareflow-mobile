@@ -6,9 +6,14 @@ import 'screen_create_order.dart';
 import 'screen_order_details.dart';
 import 'widgets/widget_order_card.dart';
 
-class ScreenOrderListing extends StatelessWidget {
+class ScreenOrderListing extends StatefulWidget {
   const ScreenOrderListing({super.key});
 
+  @override
+  State<ScreenOrderListing> createState() => _ScreenOrderListingState();
+}
+
+class _ScreenOrderListingState extends State<ScreenOrderListing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,13 +44,13 @@ class ScreenOrderListing extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: InkWell(
                             onTap: () {
-                              if (item.balance > 0) {
-                                Navigator.of(context)
-                                    .push(MaterialPageRoute(
-                                        builder: (context) =>
-                                            ScreenOrderDetails(order: item)))
-                                    .then((value) {});
-                              }
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          ScreenOrderDetails(order: item)))
+                                  .then((value) {
+                                setState(() {});
+                              });
                             },
                             child: WidgetOrderCard(order: item),
                           ));

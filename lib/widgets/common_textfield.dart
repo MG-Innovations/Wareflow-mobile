@@ -24,6 +24,7 @@ class CommonTextfield extends StatefulWidget {
   final String? hintText;
   final bool compulsory;
   final FieldType type;
+  final bool disable;
   final TextInputType keyboardType;
   final Function? onSuffixIconPressed;
   final IconData? suffixIcon;
@@ -47,6 +48,7 @@ class CommonTextfield extends StatefulWidget {
     this.fetchDropdown,
     this.searchInNetwork = false,
     this.searchController,
+    this.disable = false,
     this.compulsory = false,
     this.type = FieldType.text,
     this.keyboardType = TextInputType.text,
@@ -239,6 +241,7 @@ class _CommonTextfieldState extends State<CommonTextfield> {
             absorbing: widget.type == FieldType.dropdown,
             child: TextFormField(
               controller: widget.controller,
+              enabled: !widget.disable,
               keyboardType: widget.keyboardType,
               readOnly: widget.type == FieldType.dropdown,
               validator: (value) {
