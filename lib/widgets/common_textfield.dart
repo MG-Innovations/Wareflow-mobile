@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
-enum FieldType { text, dropdown }
+enum FieldType { text, dropdown, password }
 
 class ModelDropdown {
   final String id;
@@ -18,6 +18,7 @@ class ModelDropdown {
   }
 }
 
+// ignore: must_be_immutable
 class CommonTextfield extends StatefulWidget {
   final TextEditingController controller;
   final String? label;
@@ -26,8 +27,8 @@ class CommonTextfield extends StatefulWidget {
   final FieldType type;
   final bool disable;
   final TextInputType keyboardType;
-  final Function? onSuffixIconPressed;
-  final IconData? suffixIcon;
+  Function? onSuffixIconPressed;
+  IconData? suffixIcon;
   final IconData? prefixIcon;
   final Function(ModelDropdown item)? onSelectDropdown;
   final Function(String value)? onChangeValue;
@@ -38,7 +39,7 @@ class CommonTextfield extends StatefulWidget {
   final bool searchInNetwork;
   final String? regex;
 
-  const CommonTextfield({
+  CommonTextfield({
     super.key,
     required this.controller,
     this.label,
@@ -67,19 +68,36 @@ class CommonTextfield extends StatefulWidget {
 class _CommonTextfieldState extends State<CommonTextfield> {
   List<ModelDropdown> dropdownList = [];
   bool isLoadingDropdown = true;
-
+  bool showPass = false;
   @override
   void initState() {
     super.initState();
     _loadDropdownData();
+    initialize();
+  }
+
+  void onShowPass() {
+    setState(() {
+      showPass = !showPass;
+      widget.suffixIcon =
+          showPass ? PhosphorIcons.eye() : PhosphorIcons.eyeClosed();
+    });
+  }
+
+  void initialize() {
+    if (widget.suffixIcon == null &&
+        widget.onSuffixIconPressed == null &&
+        widget.type == FieldType.password) {
+      widget.suffixIcon =
+          showPass ? PhosphorIcons.eye() : PhosphorIcons.eyeClosed();
+      widget.onSuffixIconPressed = onShowPass;
+    }
   }
 
   Future<void> _loadDropdownData() async {
     if (widget.fetchDropdown != null) {
       try {
-        log("Searching Function: ${widget.fetchDropdown}");
         dropdownList = await widget.fetchDropdown!;
-        log("Searching Function2 : ${dropdownList.toString()}");
       } catch (e) {
         log("Error fetching dropdown data: $e");
       }
@@ -258,6 +276,7 @@ class _CommonTextfieldState extends State<CommonTextfield> {
                   widget.onChangeValue!(value);
                 }
               },
+              obscureText: !showPass && widget.type == FieldType.password,
               decoration: InputDecoration(
                 hintText: isLoadingDropdown && widget.type == FieldType.dropdown
                     ? 'Loading...'

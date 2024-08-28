@@ -66,7 +66,8 @@ class _ScreenLoginState extends State<ScreenLogin> {
                     CommonTextfield(
                       controller: passwordController,
                       label: "Password",
-                      hintText: "Enter your email address",
+                      hintText: "Enter your password",
+                      type: FieldType.password,
                       compulsory: true,
                     ),
                     const SizedBox(height: 20),
