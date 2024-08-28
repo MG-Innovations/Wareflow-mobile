@@ -34,15 +34,15 @@ class _ScreenAddProductTypeState extends State<ScreenAddProductType> {
                   children: [
                     CommonTextfield(
                       controller: nameController,
-                      label: 'Product Name',
-                      hintText: "Enter product type",
+                      label: 'Product Type Name',
+                      hintText: "Enter Product Type Name",
                       compulsory: true,
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 20),
                     CommonTextfield(
                       controller: descriptionController,
-                      hintText: "Enter product description",
-                      label: 'Product Description',
+                      hintText: "Enter Product Type Description",
+                      label: 'Product Type Description',
                       compulsory: true,
                     ),
                   ],

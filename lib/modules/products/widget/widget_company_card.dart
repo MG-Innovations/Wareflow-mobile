@@ -14,17 +14,20 @@ class WidgetCompanyTypeCard extends StatelessWidget {
         border: Border.all(color: Colors.black),
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
+      child: ListTile(
+        title: Text(
+          companyType.name ?? "NA",
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16.0,
+          ),
+        ),
+        subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(companyType.name ?? ''),
-            const SizedBox(height: 8),
-            Text(companyType.email ?? ''),
-            const SizedBox(height: 8),
-            Text(companyType.phoneNumber ?? ''),
-            const SizedBox(height: 8),
+            Text(companyType.email ?? "NA"),
+            const SizedBox(width: 10),
+            Text(companyType.phoneNumber ?? "NA")
           ],
         ),
       ),

@@ -41,13 +41,14 @@ class _ScreenAddCompanyTypeState extends State<ScreenAddCompanyType> {
                       hintText: "Enter Company Name",
                       compulsory: true,
                     ),
+                    const SizedBox(height: 20),
                     CommonTextfield(
                       controller: emailController,
                       label: 'Company Email',
                       hintText: "Enter company Email",
                       compulsory: true,
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 20),
                     CommonTextfield(
                       controller: phoneNumberController,
                       hintText: "Enter company Phone Number",

@@ -9,22 +9,24 @@ class WidgetProductTypeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.black),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(productType.name ?? ''),
-            const SizedBox(height: 8),
-            Text(productType.description ?? '')
-          ],
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(color: Colors.black),
+          borderRadius: BorderRadius.circular(8),
         ),
-      ),
-    );
+        child: ListTile(
+          title: Text(
+            productType.name ?? "",
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          subtitle: Text(
+            productType.description ?? "NA",
+            style: const TextStyle(
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+        ));
   }
 }

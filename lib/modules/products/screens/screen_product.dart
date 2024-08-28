@@ -7,8 +7,6 @@ import '../../../widgets/common_textfield.dart';
 import '../api/product_api.dart';
 import '../models/model_product.dart';
 import '../widget/widget_product_card.dart';
-import 'company_type_listing.dart';
-import 'product_type_listing.dart';
 import 'screen_add_product.dart';
 import 'screen_form.dart';
 
@@ -58,37 +56,6 @@ class _ScreenProductsState extends State<ScreenProducts> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: const Text("Inventory"),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.data_object),
-            onPressed: () async {
-              Navigator.of(context)
-                  .push(
-                MaterialPageRoute(
-                    builder: (context) => const ProductTypeListing()),
-              )
-                  .then((value) {
-                setState(() {});
-              });
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.inventory),
-            onPressed: () async {
-              Navigator.of(context)
-                  .push(
-                MaterialPageRoute(
-                    builder: (context) => const CompanyTypeListing()),
-              )
-                  .then((value) {
-                setState(() {});
-              });
-            },
-          )
-        ],
-      ),
       body: Column(
         children: [
           CommonTextfield(

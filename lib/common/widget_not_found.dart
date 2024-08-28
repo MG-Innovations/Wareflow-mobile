@@ -10,7 +10,7 @@ class WidgetNotFound extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.asset(
-          "asset/icons/not_found.png",
+          "assets/icons/not_found.png",
           height: 150,
         ),
         const SizedBox(height: 10),

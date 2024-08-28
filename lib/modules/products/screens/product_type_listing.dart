@@ -21,35 +21,30 @@ class _ProductTypeListingState extends State<ProductTypeListing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Product Type List'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: FutureBuilder(
-          future: ProductTypeApi.getProductsType(query: ''),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError) {
-              return Center(child: Text('Error: ${snapshot.error}'));
-            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return const Center(
-                  child: WidgetNotFound(text: 'No Products Type Found'));
-            } else {
-              return ListView.builder(
-                itemCount: snapshot.data!.length,
-                itemBuilder: (context, index) {
-                  final item = snapshot.data![index];
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: WidgetProductTypeCard(productType: item),
-                  );
-                },
-              );
-            }
-          },
-        ),
+      backgroundColor: Colors.white,
+      body: FutureBuilder(
+        future: ProductTypeApi.getProductsType(query: ''),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(
+                child: WidgetNotFound(text: 'No Products Type Found'));
+          } else {
+            return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                final item = snapshot.data![index];
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: WidgetProductTypeCard(productType: item),
+                );
+              },
+            );
+          }
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
