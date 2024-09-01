@@ -43,7 +43,6 @@ class _ScreenAddProductTypeState extends State<ScreenAddProductType> {
                       controller: descriptionController,
                       hintText: "Enter Product Type Description",
                       label: 'Product Type Description',
-                      compulsory: true,
                     ),
                   ],
                 ),

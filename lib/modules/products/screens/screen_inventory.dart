@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wareflow/modules/products/screens/screen_product.dart';
+import 'package:wareflow/modules/products/screens/screen_product_listing.dart';
 
 import 'company_type_listing.dart';
 import 'product_type_listing.dart';

@@ -25,9 +25,11 @@ class WidgetCompanyTypeCard extends StatelessWidget {
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(companyType.email ?? "NA"),
+            Text((companyType.email != "") ? companyType.email ?? "NA" : "NA"),
             const SizedBox(width: 10),
-            Text(companyType.phoneNumber ?? "NA")
+            Text((companyType.phoneNumber != "")
+                ? companyType.phoneNumber ?? "NA"
+                : "NA")
           ],
         ),
       ),

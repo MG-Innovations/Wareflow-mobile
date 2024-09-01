@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class HttpClient {
-  final String baseUrl = 'http://13.232.238.136:8000/api/v1';
+  final String baseUrl = 'http://52.66.88.124:8000/api/v1';
 
   Future<String?> getAuthToken() async {
     final pref = await SharedPreferences.getInstance();

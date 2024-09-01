@@ -3,7 +3,7 @@ import 'package:wareflow/common/widget_not_found.dart';
 
 import '../api/product_type_api.dart';
 import '../widget/widget_product_type_card.dart';
-import 'product_type_form_screen.dart';
+import 'screen_add_product_type.dart';
 
 class ProductTypeListing extends StatefulWidget {
   const ProductTypeListing({super.key});

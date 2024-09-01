@@ -80,7 +80,6 @@ class _ScreenAddProductState extends State<ScreenAddProduct> {
                         controller: descriptionController,
                         hintText: "Enter product description",
                         label: 'Product Description',
-                        compulsory: true,
                       ),
                       const SizedBox(height: 10),
                       CommonTextfield(

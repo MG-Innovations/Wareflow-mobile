@@ -22,7 +22,9 @@ class WidgetProductTypeCard extends StatelessWidget {
             ),
           ),
           subtitle: Text(
-            productType.description ?? "NA",
+            (productType.description != "")
+                ? productType.description ?? "NA"
+                : "NA",
             style: const TextStyle(
               fontStyle: FontStyle.italic,
             ),

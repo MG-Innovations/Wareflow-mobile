@@ -39,22 +39,26 @@ class WidgetAnalytics extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    WidgetIcon(
-                      icon: icon,
-                      primary: primaryColor,
-                      secondary: secondaryColor,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      title,
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
-                    )
-                  ],
+                Flexible(
+                  child: Row(
+                    children: [
+                      WidgetIcon(
+                        icon: icon,
+                        primary: primaryColor,
+                        secondary: secondaryColor,
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: Text(
+                          title,
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
                 Text(
                   value,

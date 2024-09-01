@@ -8,7 +8,6 @@ import '../api/product_api.dart';
 import '../models/model_product.dart';
 import '../widget/widget_product_card.dart';
 import 'screen_add_product.dart';
-import 'screen_form.dart';
 
 class ScreenProducts extends StatefulWidget {
   const ScreenProducts({super.key});
@@ -41,15 +40,6 @@ class _ScreenProductsState extends State<ScreenProducts> {
     } else {
       throw Exception('Failed to load data');
     }
-  }
-
-  void _showForm(BuildContext context, String name, String description) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => FormScreen(name: name, description: description),
-      ),
-    );
   }
 
   @override
