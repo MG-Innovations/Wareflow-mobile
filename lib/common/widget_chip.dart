@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:wareflow_mobile/utils/enums.dart';
-import 'package:wareflow_mobile/utils/helper_functions.dart';
+import '../utils/enums.dart';
+import '../utils/helper_functions.dart';
 
 class WidgetChip extends StatelessWidget {
   final Color primary;
   final Color secondary;
-  final EnumChipType chipType;
+  final EnumPaymentStatus chipType;
   const WidgetChip(
       {super.key,
       required this.primary,
@@ -15,7 +15,7 @@ class WidgetChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
         color: secondary,
         border: Border.all(color: primary),

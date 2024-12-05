@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:wareflow_mobile/modules/customers/views/screen_customer_listing.dart';
-import 'package:wareflow_mobile/modules/dashboard/views/screen_dashboard.dart';
-import 'package:wareflow_mobile/modules/orders/views/screen_orders.dart';
+import 'package:wareflow/modules/products/screens/screen_inventory.dart';
+import 'package:wareflow/modules/profile/widget/user_profile.dart';
+
+import '../../customers/screens/screen_customer_listing.dart';
+import '../../dashboard/views/screen_dashboard.dart';
+import '../../orders/views/screen_orders.dart';
 
 class ScreenHome extends StatefulWidget {
-  ScreenHome({super.key});
+  const ScreenHome({super.key});
 
   @override
   State<ScreenHome> createState() => _ScreenHomeState();
@@ -25,6 +28,7 @@ class _ScreenHomeState extends State<ScreenHome>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
         child: Column(
@@ -32,10 +36,10 @@ class _ScreenHomeState extends State<ScreenHome>
             Expanded(
                 child: TabBarView(controller: tabController, children: const [
               ScreenDashboard(),
-              Placeholder(),
-              ScreenCustomerListing(),
+              ScreenInventory(),
+              ScreenCustomers(),
               ScreenOrderListing(),
-              Placeholder()
+              UserProfile(userId: '1')
             ]))
           ],
         ),

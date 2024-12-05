@@ -1,27 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:wareflow_mobile/modules/home/views/screen_home.dart';
-import 'package:wareflow_mobile/utils/colors.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../modules/auth/views/screen_login.dart';
+import '../utils/colors.dart';
 
-void main() {
+SharedPreferences? pref;
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  pref = await SharedPreferences.getInstance();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Wareflow',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
         useMaterial3: true,
-        textTheme: GoogleFonts.montserratTextTheme().copyWith(),
+        // textTheme: GoogleFonts.montserratTextTheme().copyWith(),
       ),
-      home: ScreenHome(),
+      home: const ScreenLogin(),
+      routes: {'/login': (context) => const ScreenLogin()},
     );
   }
 }

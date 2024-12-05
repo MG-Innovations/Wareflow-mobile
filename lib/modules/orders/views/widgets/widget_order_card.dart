@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:wareflow_mobile/common/widget_chip.dart';
-import 'package:wareflow_mobile/common/widget_date.dart';
-import 'package:wareflow_mobile/modules/orders/views/widgets/widget_key_value.dart';
-import 'package:wareflow_mobile/utils/enums.dart';
+import '../../../../common/widget_date.dart';
+import '../../models/model_order.dart';
+import 'widget_key_value.dart';
+import 'widget_payment_chip.dart';
 
 class WidgetOrderCard extends StatelessWidget {
-  const WidgetOrderCard({super.key});
+  final ModelOrder order;
+  const WidgetOrderCard({super.key, required this.order});
 
   @override
   Widget build(BuildContext context) {
@@ -28,23 +29,27 @@ class WidgetOrderCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text(
-                'Customer 1',
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
+              Expanded(
+                child: Text(
+                  order.customer?.name ?? "NA",
+                  style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black),
+                ),
               ),
-              WidgetDate(date: DateTime.now())
+              WidgetDate(date: order.createdAt)
             ],
           ),
           const SizedBox(height: 5),
-          const Row(
+          Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              WidgetKeyValue(keyString: "Order Value", value: "\$5000"),
-              WidgetKeyValue(keyString: "Balance", value: "\$5000"),
+              WidgetKeyValue(
+                  keyString: "Order Value", value: order.orderValue.toString()),
+              WidgetKeyValue(
+                  keyString: "Balance", value: order.balance.toString()),
             ],
           ),
           const Divider(),
@@ -52,11 +57,9 @@ class WidgetOrderCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const WidgetKeyValue(keyString: "Items", value: "5"),
-              WidgetChip(
-                  primary: Colors.red,
-                  secondary: Colors.red.shade100,
-                  chipType: EnumChipType.paymentPending)
+              WidgetKeyValue(
+                  keyString: "Items", value: order.itemCount.toString()),
+              getPaymentChip(order.status)
             ],
           )
         ],

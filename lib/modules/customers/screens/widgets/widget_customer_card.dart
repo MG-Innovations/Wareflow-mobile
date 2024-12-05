@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../../../common/widget_icon_value.dart';
+import '../../models/model_customer.dart';
 
 class WidgetCustomerCard extends StatelessWidget {
-  const WidgetCustomerCard({super.key});
+  final ModelCustomer customer;
+  const WidgetCustomerCard({super.key, required this.customer});
 
   @override
   Widget build(BuildContext context) {
@@ -27,18 +29,18 @@ class WidgetCustomerCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text(
-                'Customer 1',
-                style: TextStyle(
+              Text(
+                customer.name,
+                style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.black),
               ),
-              WidgetIconValue(
-                  primaryColor: Colors.green.shade400,
-                  iconData: PhosphorIcons.arrowCircleDownLeft(
-                      PhosphorIconsStyle.fill),
-                  value: "\$20,000"),
+              // WidgetIconValue(
+              //     primaryColor: Colors.green.shade400,
+              //     iconData: PhosphorIcons.arrowCircleDownLeft(
+              //         PhosphorIconsStyle.fill),
+              //     value: "\$20,000"),
             ],
           ),
           const Divider(),
@@ -47,11 +49,8 @@ class WidgetCustomerCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               WidgetIconValue(
-                  iconData: PhosphorIcons.phoneCall(), value: "+91 9420486908"),
-              const SizedBox(height: 5),
-              WidgetIconValue(
-                  iconData: PhosphorIcons.mapPinArea(),
-                  value: "Ashoka Marg Nashik"),
+                  iconData: PhosphorIcons.phoneCall(),
+                  value: customer.phoneNumber),
             ],
           ),
         ],
